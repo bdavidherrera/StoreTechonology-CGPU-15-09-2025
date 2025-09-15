@@ -1410,3 +1410,134 @@ form {
     color: #f44336; /* rojo */
     font-weight: bold;
 }
+
+/* Estilos específicos para la sección de Gastos */
+#estadisticasGastos .stat-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+#estadisticasGastos .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+#estadisticasGastos .stat-card.bg-primary {
+    background: linear-gradient(135deg, #4e73df, #2e59d9);
+}
+
+#estadisticasGastos .stat-card.bg-success {
+    background: linear-gradient(135deg, #1cc88a, #17a673);
+}
+
+#estadisticasGastos .stat-card.bg-info {
+    background: linear-gradient(135deg, #36b9cc, #2c9faf);
+}
+
+#estadisticasGastos .stat-card.bg-warning {
+    background: linear-gradient(135deg, #f6c23e, #dda20a);
+}
+
+#estadisticasGastos .stat-card .stat-icon {
+    font-size: 2.5rem;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+}
+
+#estadisticasGastos .stat-card .stat-info h4 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+#estadisticasGastos .stat-card .stat-info p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 0.9rem;
+}
+
+/* Estilos para la tabla de gastos */
+.gasto-row {
+    transition: all 0.2s ease;
+}
+
+.gasto-row:hover {
+    background-color: #f8f9fc;
+    transform: translateX(5px);
+}
+
+.monto-gasto {
+    font-weight: bold;
+    color: #e74a3b;
+}
+
+.badge-categoria {
+    background-color: #4e73df;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.btn-action {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+}
+
+.btn-action:hover {
+    transform: scale(1.1);
+}
+
+.btn-edit {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+}
+
+.btn-delete {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+.no-data {
+    padding: 3rem;
+    text-align: center;
+    color: #6c757d;
+}
+/* ====== SELECTS (Gastos, Categorías, etc.) ====== */
+select.form-control,
+select {
+  background: #fff !important;     /* Fondo blanco */
+  color: #333 !important;          /* Texto oscuro */
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 0.2rem 0.2rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  appearance: auto !important;     /* Forzar estilo nativo visible */
+}
+
+/* Opciones del select */
+select option {
+  background: #fff !important;     /* Fondo blanco */
+  color: #333 !important;          /* Texto oscuro */
+  font-weight: 500;
+}

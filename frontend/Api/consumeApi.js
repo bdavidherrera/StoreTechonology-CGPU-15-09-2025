@@ -125,6 +125,213 @@ export const eliminarUsuarios = async (idusuarios) => {
         console.error("Error al eliminar el usuario:", error);
     }
 }
+
+//Gastos CRUD
+// ✅ Obtener productos para gastos (dropdown)
+export const obtenerProductosParaGastos = async () => {
+  try {
+    const response = await fetch(urlProductosGastos, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Productos para gastos obtenidos:", data);
+    return data;
+  } catch (error) {
+    console.error("Error al obtener productos para gastos:", error);
+    throw new Error(`Error al obtener productos para gastos: ${error.message}`);
+  }
+};
+
+// ✅ Obtener todos los gastos
+export const obtenerGastos = async () => {
+  try {
+    const response = await fetch(urlObtenerGastos, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Gastos obtenidos:", data);
+    return data;
+  } catch (error) {
+    console.error("Error al obtener gastos:", error);
+    throw new Error(`Error al obtener gastos: ${error.message}`);
+  }
+};
+
+// ✅ Registrar nuevo gasto
+export const registrarGasto = async (gastoData) => {
+  try {
+    console.log("Enviando datos del gasto:", gastoData);
+
+    const response = await fetch(urlRegistrarGasto, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(gastoData),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Gasto registrado exitosamente:", data);
+    return data;
+  } catch (error) {
+    console.error("Error al registrar gasto:", error);
+    throw new Error(`Error al registrar gasto: ${error.message}`);
+  }
+};
+
+// ✅ Actualizar gasto existente
+export const actualizarGasto = async (gastoData) => {
+  try {
+    console.log("Enviando datos para actualizar gasto:", gastoData);
+
+    if (!gastoData.idGasto) {
+      throw new Error("El ID del gasto es requerido para actualizar");
+    }
+
+    const response = await fetch(urlActualizarGasto, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(gastoData),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Gasto actualizado exitosamente:", data);
+    return data;
+  } catch (error) {
+    console.error("Error al actualizar gasto:", error);
+    throw new Error(`Error al actualizar gasto: ${error.message}`);
+  }
+};
+
+// ✅ Eliminar gasto
+export const eliminarGasto = async (idGasto) => {
+  try {
+    console.log("Eliminando gasto con ID:", idGasto);
+
+    if (!idGasto) {
+      throw new Error("El ID del gasto es requerido para eliminar");
+    }
+
+    const response = await fetch(`${urlEliminarGasto}/${idGasto}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Gasto eliminado exitosamente:", data);
+    return data;
+  } catch (error) {
+    console.error("Error al eliminar gasto:", error);
+    throw new Error(`Error al eliminar gasto: ${error.message}`);
+  }
+};
+
+// ✅ Obtener gastos por rango de fechas (funcionalidad adicional)
+export const obtenerGastosPorFecha = async (fechaInicio, fechaFin) => {
+  try {
+    const params = new URLSearchParams();
+    if (fechaInicio) params.append('fechaInicio', fechaInicio);
+    if (fechaFin) params.append('fechaFin', fechaFin);
+
+    const response = await fetch(`${urlObtenerGastos}?${params}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Gastos por fecha obtenidos:", data);
+    return data;
+  } catch (error) {
+    console.error("Error al obtener gastos por fecha:", error);
+    throw new Error(`Error al obtener gastos por fecha: ${error.message}`);
+  }
+};
+
+// ✅ Obtener estadísticas de gastos (funcionalidad adicional)
+export const obtenerEstadisticasGastos = async () => {
+  try {
+    const gastos = await obtenerGastos();
+    
+    if (!Array.isArray(gastos)) {
+      return {
+        totalGastos: 0,
+        montoTotal: 0,
+        promedioGasto: 0,
+        gastosPorCategoria: {}
+      };
+    }
+
+    const totalGastos = gastos.length;
+    const montoTotal = gastos.reduce((sum, gasto) => sum + parseFloat(gasto.monto || 0), 0);
+    const promedioGasto = totalGastos > 0 ? montoTotal / totalGastos : 0;
+    
+    // Agrupar por categoría
+    const gastosPorCategoria = gastos.reduce((acc, gasto) => {
+      const categoria = gasto.categoria || 'Sin categoría';
+      if (!acc[categoria]) {
+        acc[categoria] = { count: 0, monto: 0 };
+      }
+      acc[categoria].count++;
+      acc[categoria].monto += parseFloat(gasto.monto || 0);
+      return acc;
+    }, {});
+
+    const estadisticas = {
+      totalGastos,
+      montoTotal: parseFloat(montoTotal.toFixed(2)),
+      promedioGasto: parseFloat(promedioGasto.toFixed(2)),
+      gastosPorCategoria
+    };
+
+    console.log("Estadísticas de gastos:", estadisticas);
+    return estadisticas;
+  } catch (error) {
+    console.error("Error al obtener estadísticas de gastos:", error);
+    throw new Error(`Error al obtener estadísticas de gastos: ${error.message}`);
+  }
+};
+
 //Proveedores CRUD
 
 export const obtainProveedores = async () => {
