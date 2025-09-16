@@ -230,6 +230,15 @@ function mostrarVentas(ventas) {
                 </small>
             </td>
             <td>
+                <span class="badge badge-info">${venta.costo_total}</span>
+            </td>
+            <td>
+                <strong class="monto-total">${formatearNumero(venta.utilidad)}</strong>
+            </td>
+            <td>
+                <strong class="monto-total">${formatearNumero(venta.retencion_fuente)}</strong>
+            </td>
+            <td>
                 <div class="action-buttons">
                     <button class="btn btn-sm btn-outline-info" onclick="verDetalleVenta(${venta.idVenta})" title="Ver detalle">
                         <i class="fas fa-eye"></i>
@@ -449,6 +458,18 @@ window.verDetalleVenta = async function(idVenta) {
                             <tr>
                                 <td><strong>Impuestos:</strong></td>
                                 <td class="text-right text-info" style="white-space: nowrap;">+${formatearNumero(venta.impuestos)}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Costo:</strong></td>
+                                <td class="text-right text-info" style="white-space: nowrap;">${formatearNumero(venta.costo_total)}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Utilidad:</strong></td>
+                                <td class="text-right text-info" style="white-space: nowrap;">${formatearNumero(venta.utilidad)}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Retencion fuente:</strong></td>
+                                <td class="text-right text-info" style="white-space: nowrap;">${formatearNumero(venta.retencion_fuente)}</td>
                             </tr>
                             <tr class="border-top border-primary">
                                 <td><strong class="text-primary">TOTAL:</strong></td>

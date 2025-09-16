@@ -79,7 +79,7 @@ const putPedidoEstado = async (req, res) => {
     } 
 };
 
-// FUNCIÓN CORREGIDA: Crear pedido con mejor manejo de ventas
+// FUNCIÓN MEJORADA: Crear pedido con cálculo de costos y utilidades
 const postPedido = async (req, res) => {
     const connection = await getConnection();
     
@@ -110,6 +110,23 @@ const postPedido = async (req, res) => {
             });
         }
 
+        // NUEVO: Obtener información del usuario para verificar rol
+        const usuarioInfo = await connection.query(
+            "SELECT rol FROM usuario WHERE idUsuario = ?", 
+            [idUsuario]
+        );
+
+        if (usuarioInfo.length === 0) {
+            await connection.query("ROLLBACK");
+            return res.status(400).json({
+                success: false,
+                message: "Usuario no encontrado"
+            });
+        }
+
+        const rolUsuario = usuarioInfo[0].rol;
+        const esEmpresa = rolUsuario === 'empresa';
+
         // Insertar pedido principal
         const pedido = {
             estado: estado || 'pendiente',
@@ -131,23 +148,52 @@ const postPedido = async (req, res) => {
 
         console.log(`Pedido creado con ID: ${idPedido}`);
 
+        // NUEVO: Variables para cálculos empresariales
+        let costoTotalPedido = 0;
+        let valorRetefuenteTotal = 0;
+        let aplicaRetefuente = false;
+
         // Insertar detalles del pedido si se proporcionaron
         if (items && Array.isArray(items) && items.length > 0) {
             console.log(`Procesando ${items.length} items del pedido`);
             
             for (const item of items) {
-                // Verificar stock disponible antes de procesar
-                const stockDisponible = await connection.query(
-                    "SELECT cantidad FROM producto WHERE idProducto = ?",
-                    [item.idProducto]
-                );
+                // Obtener información completa del producto incluyendo costos y retención
+                const productoInfo = await connection.query(`
+                    SELECT p.cantidad, p.precio_costo, p.porcentaje_retefuente, 
+                           pr.porcentaje_retefuente as proveedor_retefuente
+                    FROM producto p 
+                    LEFT JOIN proveedor pr ON p.idProveedor = pr.idProveedor
+                    WHERE p.idProducto = ?
+                `, [item.idProducto]);
 
-                if (stockDisponible.length === 0) {
+                if (productoInfo.length === 0) {
                     throw new Error(`Producto con ID ${item.idProducto} no existe`);
                 }
 
-                if (stockDisponible[0].cantidad < parseInt(item.cantidad)) {
-                    throw new Error(`Stock insuficiente para producto ID ${item.idProducto}. Disponible: ${stockDisponible[0].cantidad}, Solicitado: ${item.cantidad}`);
+                const producto = productoInfo[0];
+
+                // Verificar stock disponible
+                if (producto.cantidad < parseInt(item.cantidad)) {
+                    throw new Error(`Stock insuficiente para producto ID ${item.idProducto}. Disponible: ${producto.cantidad}, Solicitado: ${item.cantidad}`);
+                }
+
+                // NUEVO: Calcular costos y retención para empresas
+                const costoUnitario = parseFloat(producto.precio_costo) || 0;
+                const costoLineaItem = costoUnitario * parseInt(item.cantidad);
+                costoTotalPedido += costoLineaItem;
+
+                // Calcular retención en la fuente si es empresa
+                if (esEmpresa) {
+                    const porcentajeRetefuente = parseFloat(producto.proveedor_retefuente) || 
+                                               parseFloat(producto.porcentaje_retefuente) || 0;
+                    
+                    if (porcentajeRetefuente > 0) {
+                        const valorItemSinDescuento = parseFloat(item.precio_unitario) * parseInt(item.cantidad);
+                        const retefuenteItem = valorItemSinDescuento * (porcentajeRetefuente / 100);
+                        valorRetefuenteTotal += retefuenteItem;
+                        aplicaRetefuente = true;
+                    }
                 }
 
                 const detalle = {
@@ -207,16 +253,28 @@ const postPedido = async (req, res) => {
 
             console.log(`Pago registrado con ID: ${idPago}`);
 
-            // CORREGIDO: Actualizar el estado del pedido a 'pagado' cuando hay pago exitoso
+            // Actualizar el estado del pedido a 'pagado' cuando hay pago exitoso
             await connection.query(
                 "UPDATE pedidos SET estado = 'pagado' WHERE idPedido = ?",
                 [idPedido]
             );
 
             // **Registrar venta automáticamente cuando hay pago exitoso**
-            console.log("Registrando venta automática...");
+            console.log("Registrando venta automática con cálculos empresariales...");
             
-            const resultadoVenta = await ventasController.registrarVentaAutomatica(idPedido, connection);
+            // NUEVO: Pasar información adicional para cálculos empresariales
+            const datosVentaEmpresarial = {
+                costoTotal: costoTotalPedido,
+                valorRetefuente: valorRetefuenteTotal,
+                aplicaRetefuente: aplicaRetefuente && esEmpresa,
+                esEmpresa: esEmpresa
+            };
+            
+            const resultadoVenta = await ventasController.registrarVentaAutomatica(
+                idPedido, 
+                connection, 
+                datosVentaEmpresarial
+            );
             
             if (resultadoVenta.success) {
                 ventaRegistrada = true;
@@ -237,6 +295,12 @@ const postPedido = async (req, res) => {
             idPago: idPago,
             ventaRegistrada,
             estado: datosPago ? 'pagado' : (estado || 'pendiente'),
+            calculosEmpresariales: esEmpresa ? {
+                costoTotal: costoTotalPedido,
+                valorRetefuente: valorRetefuenteTotal,
+                aplicaRetefuente: aplicaRetefuente,
+                utilidadBruta: parseFloat(total) - costoTotalPedido
+            } : null,
             pedido: {
                 idPedido,
                 ...pedido
@@ -364,7 +428,6 @@ const getPedidoDetalle = async (req, res) => {
         res.status(500).json({ message: "Error al obtener el detalle del pedido" });
     }
 };
-
 
 const getPedidosTodo = async (req, res) => {
     try {
