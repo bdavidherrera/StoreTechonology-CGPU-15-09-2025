@@ -99,13 +99,7 @@ function mostrarProveedores(proveedores) {
                 </span>
             </td>
             <td>
-                    <button 
-                        class="btn btn-sm btn-edit btn-action" 
-                        onclick="editarProveedor(${proveedor.idProveedor})"
-                        title="Editar proveedor"
-                    >
-                        <i class="fas fa-edit"></i>
-                    </button>
+                    
                     <button 
                         class="btn btn-sm btn-delete btn-action" 
                         onclick="confirmarEliminarProveedor(${proveedor.idProveedor}, '${proveedor.nombre}')"

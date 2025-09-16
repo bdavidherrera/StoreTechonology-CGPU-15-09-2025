@@ -26,7 +26,7 @@ async function obtenerProductos() {
         container.innerHTML = "";
 
         ProductosObtained.forEach((productos) => {
-            const { idProducto, nombreProducto, imagen, valor, cantidad, informacion, fecha_creacion, porcentaje_impuesto } = productos;
+            const { idProducto, nombreProducto, imagen, valor, cantidad, informacion, fecha_creacion, porcentaje_impuesto, precio_costo, idProveedor, porcentaje_retefuente} = productos;
 
             const row = document.createElement('tr');
             row.innerHTML = `
@@ -42,6 +42,10 @@ async function obtenerProductos() {
                 <td>${informacion}</td>
                 <td>${new Date(fecha_creacion).toLocaleString()}</td>
                 <td>${porcentaje_impuesto || 19}%</td>
+                <td>$${Number(precio_costo).toLocaleString('es-CO')}</td>
+                <td>${idProveedor}</td>
+                <td>${porcentaje_retefuente || 0}%</td>
+
                 <td>
                     <button class="btn btn-sm btn-edit btn-action" data-id="${idProducto}">
     <i class="fas fa-edit"></i>
@@ -137,7 +141,7 @@ function configurarFormularioActualizar() {
                 : imagenActual;
 
             const datosProducto = {
-                idProducto: parseInt(document.getElementById("idProductoActualizar").value, 10),
+                idProducto: parseInt(document.getElementById("idProductoActualizar").value),
                 nombreProducto: document.getElementById("nombreProductoActualizar").value.trim(),
                 valor: parseFloat(document.getElementById("valorActualizar").value),
                 cantidad: parseInt(document.getElementById("cantidadActualizar").value, 10),
