@@ -47,6 +47,16 @@ const urlRegistrarGasto = "http://localhost:8000/api/gastos"
 const urlActualizarGasto = "http://localhost:8000/api/gastos/ActualizarGastos"
 const urlEliminarGasto = "http://localhost:8000/api/gastos"
 
+//Compras API
+const urlCompras = "http://localhost:8000/api/compras";
+const urlRegistrarCompra = "http://localhost:8000/api/compras"
+const urlActualizarCompra = "http://localhost:8000/api/compras"
+const urlEliminarCompra = "http://localhost:8000/api/compras/EliminarCompra"
+const urlEstadisticasCompras = "http://localhost:8000/api/compras/estadisticas"
+const urlEstadisticasProveedores = "http://localhost:8000/api/compras/proveedores"
+const urlEstadisticasProductos = "http://localhost:8000/api/compras/productos"
+
+
 //Usuarios CRUD
 
 export const registrarUsuario = async (datosUsuario) => {
