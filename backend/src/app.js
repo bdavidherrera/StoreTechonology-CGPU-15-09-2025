@@ -11,6 +11,7 @@ import getHistorialCompra from "./routers/historialCliente.routes.js"
 import ventasRoutes from "./routers/ventas.routes.js";
 import proveedorRoutes from "./routers/proveedor.routes.js";
 import gastosRouter from "./routers/gastos.routes.js";
+import comprasRoutes from "./routers/compras.routes.js"
 
 
 
@@ -51,6 +52,9 @@ app.use("/api/proveedor", proveedorRoutes) //Crear, mostrar, actualizar y elimin
 
 /*Gastos*/
 app.use("/api/gastos", gastosRouter) //Crear, mostrar, actualizar y eliminar gastos (desde admin)
+
+/*Compras*/
+app.use("/api/compras", comprasRoutes) //Crear, mostrar, actualizar y eliminar compras (desde admin)
 
 /*Pedidos*/
 
