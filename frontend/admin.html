@@ -35,6 +35,9 @@
             <li>
                 <a href="#gastos"><i class="fas fa-money-bill-wave"></i> Gastos</a>
             </li>
+            <li>
+                <a href="#compras"><i class="fas fa-truck"></i> Compras</a>
+            </li>
             <button id="btnCerrarSesion" class="btn-add">
                 <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
             </button>
@@ -324,6 +327,114 @@
                 </table>
             </div>
         </section>
+        <!-- Sección Compras-->
+        <section id="compras" class="card seccion-content">
+            <div class="compras-header">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2><i class="fas fa-shopping-cart"></i> Gestión de Compras</h2>
+                    <div class="compras-actions">
+                        <button class="btn-add" id="btnAgregarCompra">
+                            <i class="fas fa-plus"></i> Agregar Compra
+                        </button>
+                        <button class="btn btn-outline-success" id="btnExportarCompras">
+                            <i class="fas fa-download"></i> Exportar CSV
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Estadísticas Generales -->
+                <div id="estadisticasCompras" class="estadisticas-container mb-4">
+                    <!-- Las estadísticas se cargarán aquí dinámicamente -->
+                </div>
+
+                <!-- Filtros -->
+                <div class="filtros-compras card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-filter"></i> Filtrar Compras</h5>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="filtroProveedorCompras">
+                                        <i class="fas fa-building"></i> Proveedor
+                                    </label>
+                                    <select class="form-control" id="filtroProveedorCompras">
+                                        <option value="">Todos los proveedores</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="fechaInicioCompras">
+                                        <i class="fas fa-calendar-alt"></i> Fecha Inicio
+                                    </label>
+                                    <input type="date" class="form-control" id="fechaInicioCompras">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="fechaFinCompras">
+                                        <i class="fas fa-calendar-alt"></i> Fecha Fin
+                                    </label>
+                                    <input type="date" class="form-control" id="fechaFinCompras">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>&nbsp;</label>
+                                    <div class="d-flex">
+                                        <button type="button" class="btn btn-primary mr-2" id="btnBuscarFechasCompras">
+                                            <i class="fas fa-search"></i> Buscar
+                                        </button>
+                                        <button type="button" class="btn btn-outline-secondary"
+                                            id="btnLimpiarFiltrosCompras">
+                                            <i class="fas fa-eraser"></i> Limpiar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Estadísticas del Período -->
+                        <div id="estadisticasPeriodoCompras" style="display: none;">
+                            <!-- Se mostrarán las estadísticas del período filtrado -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div id="cargandoCompras" class="text-center py-4" style="display: none;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Cargando...</span>
+                </div>
+                <p class="mt-2">Cargando compras...</p>
+            </div>
+
+            <!-- Tabla de Compras -->
+            <div class="table-responsive">
+                <table class="table table-hover compras-table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Proveedor</th>
+                            <th>Fecha</th>
+                            <th>Subtotal</th>
+                            <th>Retención</th>
+                            <th>Total</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaCompras">
+                        <!-- Las compras se cargarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Paginación -->
+            <div id="paginacionCompras" class="mt-4">
+                <!-- La paginación se generará dinámicamente -->
+            </div>
+        </section>
     </div>
 
     <!-- Modal para Detalle de Venta -->
@@ -548,9 +659,588 @@
         </div>
     </div>
 
+    <!-- Modal Agregar Compra -->
+    <div class="modal fade" id="modalAgregarCompra" tabindex="-1" role="dialog"
+        aria-labelledby="modalAgregarCompraLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="modalAgregarCompraLabel">
+                        <i class="fas fa-plus-circle"></i> Agregar Nueva Compra
+                    </h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formAgregarCompra">
+                        <!-- Información del Proveedor -->
+                        <div class="card mb-4">
+                            <div class="card-header bg-light">
+                                <h6 class="mb-0" id="colorInformacionP"><i class="fas fa-building"></i> Información del
+                                    Proveedor</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label for="idProveedor">
+                                                <i class="fas fa-building"></i> Proveedor *
+                                            </label>
+                                            <select class="form-control" id="idProveedor" name="idProveedor" required>
+                                                <option value="">Seleccionar proveedor...</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox mt-4 pt-2">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="aplicarRetefuente" name="aplicarRetefuente">
+                                                <label class="custom-control-label" for="aplicarRetefuente">
+                                                    <i class="fas fa-percentage"></i> Aplicar Retención en la Fuente
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Productos -->
+                        <div class="card mb-4">
+                            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0" id="colorInformacionP"><i class="fas fa-box"></i> Productos</h6>
+                                <button type="button" class="btn btn-sm btn-success btn-agregar-producto">
+                                    <i class="fas fa-plus"></i> Agregar Producto
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div id="productosContainer">
+                                    <!-- Los productos se agregarán dinámicamente aquí -->
+                                </div>
+
+                                <!-- Resumen de Totales -->
+                                <div class="row mt-4">
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-4">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between">
+                                                    <strong>Subtotal:</strong>
+                                                    <span class="subtotal-total">$0.00</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between text-warning">
+                                                    <strong>Retención:</strong>
+                                                    <span class="retefuente-total">$0.00</span>
+                                                </div>
+                                                <hr>
+                                                <div class="d-flex justify-content-between text-success">
+                                                    <strong>Total a Pagar:</strong>
+                                                    <span class="total-final font-weight-bold">$0.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Información:</strong> Los campos marcados con (*) son obligatorios.
+                            La retención en la fuente se calculará automáticamente según el porcentaje configurado para
+                            el proveedor.
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                <i class="fas fa-times"></i> Cancelar
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="limpiarFormularioAgregarCompra()">
+                                <i class="fas fa-eraser"></i> Limpiar
+                            </button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> Guardar Compra
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Actualizar Compra -->
+    <div class="modal fade" id="modalActualizarCompra" tabindex="-1" role="dialog"
+        aria-labelledby="modalActualizarCompraLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-white">
+                    <h5 class="modal-title" id="modalActualizarCompraLabel">
+                        <i class="fas fa-edit"></i> Actualizar Compra
+                    </h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formActualizarCompra">
+                        <input type="hidden" id="idCompraActualizar" name="idCompra">
+
+                        <!-- Información del Proveedor -->
+                        <div class="card mb-4">
+                            <div class="card-header bg-light">
+                                <h6 class="mb-0" id="colorInformacionP"><i class="fas fa-building"></i> Información del
+                                    Proveedor</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label for="idProveedorActualizar">
+                                                <i class="fas fa-building"></i> Proveedor *
+                                            </label>
+                                            <select class="form-control" id="idProveedorActualizar" name="idProveedor"
+                                                required>
+                                                <option value="">Seleccionar proveedor...</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox mt-4 pt-2">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="aplicarRetefuenteActualizar" name="aplicarRetefuente">
+                                                <label class="custom-control-label" for="aplicarRetefuenteActualizar">
+                                                    <i class="fas fa-percentage"></i> Aplicar Retención en la Fuente
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Productos -->
+                        <div class="card mb-4">
+                            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0" id="colorInformacionP"><i class="fas fa-box"></i> Productos</h6>
+                                <button type="button" class="btn btn-sm btn-success btn-agregar-producto"
+                                    onclick="agregarLineaProducto('#productosContainerActualizar')">
+                                    <i class="fas fa-plus"></i> Agregar Producto
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div id="productosContainerActualizar">
+                                    <!-- Los productos se agregarán dinámicamente aquí -->
+                                </div>
+
+                                <!-- Resumen de Totales -->
+                                <div class="row mt-4">
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-4">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between">
+                                                    <strong>Subtotal:</strong>
+                                                    <span class="subtotal-total">$0.00</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between text-warning">
+                                                    <strong>Retención:</strong>
+                                                    <span class="retefuente-total">$0.00</span>
+                                                </div>
+                                                <hr>
+                                                <div class="d-flex justify-content-between text-success">
+                                                    <strong>Total a Pagar:</strong>
+                                                    <span class="total-final font-weight-bold">$0.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong>Importante:</strong> Al actualizar una compra, el inventario se ajustará
+                            automáticamente
+                            restando las cantidades anteriores y sumando las nuevas.
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                <i class="fas fa-times"></i> Cancelar
+                            </button>
+                            <button type="button" class="btn btn-warning" onclick="limpiarFormularioActualizarCompra()">
+                                <i class="fas fa-undo"></i> Restablecer
+                            </button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> Actualizar Compra
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Detalle de Compra -->
+    <div class="modal fade" id="modalDetalleCompra" tabindex="-1" role="dialog"
+        aria-labelledby="modalDetalleCompraLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title" id="modalDetalleCompraLabel">
+                        <i class="fas fa-receipt"></i> Detalle de Compra
+                    </h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="contenidoDetalleCompra">
+                    <!-- El contenido se cargará dinámicamente -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estilos CSS para Compras -->
+    <style>
+        /* --- Estilos mejorados para el modal Detalle de Compra --- */
+        .modal-content {
+            max-width: 90vw;
+            /* Que no ocupe todo el ancho de la pantalla */
+            max-height: 85vh;
+            /* Que no se pase del alto de la pantalla */
+            overflow: hidden;
+            /* Evita desbordamiento extraño */
+            border-radius: 12px;
+        }
+
+        #colorInformacionP {
+            color: black;
+        }
+
+        /* Contenido interno con scroll si es necesario */
+        .modal-body {
+            max-height: 65vh;
+            /* El body tendrá scroll cuando el contenido crezca */
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        /* Encabezado fijo arriba */
+        .modal-header {
+            cursor: move;
+            /* Indicador para que el usuario sepa que puede arrastrar */
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 12px 12px 0 0;
+        }
+
+        /* Hacer más legible el footer */
+        .modal-footer {
+            background: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+            border-radius: 0 0 12px 12px;
+        }
+
+        /* Tabla con scroll horizontal si hay muchos productos */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        /* Estilos para la sección de compras */
+        .compras-header {
+            margin-bottom: 2rem;
+        }
+
+        .compras-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .estadisticas-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-card.bg-primary {
+            background: linear-gradient(135deg, #4e73df, #2e59d9);
+        }
+
+        .stat-card.bg-success {
+            background: linear-gradient(135deg, #1cc88a, #17a673);
+        }
+
+        .stat-card.bg-info {
+            background: linear-gradient(135deg, #36b9cc, #2c9faf);
+        }
+
+        .stat-card.bg-warning {
+            background: linear-gradient(135deg, #f6c23e, #dda20a);
+        }
+
+        .stat-card .stat-icon {
+            font-size: 2.5rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .stat-info h4 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-card .stat-info p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .stat-card-small {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .filtros-compras {
+            border-left: 4px solid #667eea;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .filtros-compras .card-title {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .compras-table {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .compras-table thead {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .compras-table .compra-row {
+            transition: all 0.2s ease;
+        }
+
+        .compras-table .compra-row:hover {
+            background-color: #f8f9fc;
+            transform: translateX(5px);
+        }
+
+        .proveedor-info strong {
+            color: #5a5c69;
+        }
+
+        .monto-total {
+            color: #1cc88a;
+            font-size: 1.1rem;
+        }
+
+        .monto-subtotal {
+            color: #36b9cc;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .action-buttons .btn {
+            transition: all 0.2s ease;
+        }
+
+        .action-buttons .btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Estilos para los modales de compra */
+        .producto-linea {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            transition: all 0.3s ease;
+        }
+
+        .producto-linea:hover {
+            border-color: #667eea;
+            background: #f0f1ff;
+        }
+
+        .producto-info {
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+        }
+
+        .subtotal-display {
+            font-weight: bold;
+            color: #28a745;
+            text-align: right;
+        }
+
+        /* Animación para agregar productos */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .producto-linea {
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        /* Botones personalizados */
+        .btn-agregar-producto {
+            transition: all 0.2s ease;
+        }
+
+        .btn-agregar-producto:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(40, 167, 69, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .estadisticas-container {
+                padding: 1rem;
+            }
+
+            .stat-card {
+                margin-bottom: 0.5rem;
+            }
+
+            .stat-card .stat-info h4 {
+                font-size: 1.5rem;
+            }
+
+            .compras-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .action-buttons {
+                flex-wrap: wrap;
+            }
+
+            .producto-linea .row>div {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Estilos para el detalle de compra */
+        .current-image {
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .preview-image {
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Mejoras visuales para la tabla */
+        .no-data {
+            padding: 3rem;
+            color: #6c757d;
+        }
+
+        .no-data i {
+            opacity: 0.5;
+        }
+
+        /* Paginación personalizada */
+        .pagination .page-link {
+            color: #667eea;
+            border-color: #dee2e6;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: #667eea;
+            border-color: #667eea;
+        }
+
+        .pagination .page-link:hover {
+            color: #5a67d8;
+            background-color: #e3f2fd;
+            border-color: #bbdefb;
+        }
+
+        /* Loading spinner */
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+        }
+
+        /* Badges personalizados */
+        .badge-success {
+            background-color: #1cc88a !important;
+        }
+
+        .badge-warning {
+            background-color: #f6c23e !important;
+        }
+
+        .badge-danger {
+            background-color: #e74a3b !important;
+        }
+
+        .badge-primary {
+            background-color: #4e73df !important;
+        }
+
+        /* Efectos de hover para tarjetas */
+        .card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+    </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
     <script type="module" src="js/Admin/productosAdmin.js"></script>
@@ -559,7 +1249,8 @@
     <script type="module" src="js/ventas.js"></script>
     <script type="module" src="js/proveedor.js"></script>
     <script type="module" src="js/gastos.js"></script>
-    
+    <script type="module" src="js/compras.js"></script>
+
 
     <script>
         $(document).ready(function () {
@@ -584,6 +1275,7 @@
             });
 
             // Manejar navegación entre secciones
+            // Manejar navegación entre secciones
             $('.sidebar a[href^="#"]').click(function (e) {
                 e.preventDefault();
                 const target = $(this).attr('href');
@@ -597,11 +1289,29 @@
                 // Actualizar clase activa en sidebar
                 $('.sidebar a').removeClass('active');
                 $(this).addClass('active');
+
+                // Guardar última sección en localStorage
+                localStorage.setItem('ultimaSeccion', target);
             });
 
-            // Mostrar productos por defecto
-            $('#productos').show();
-            $('.sidebar a[href="#productos"]').addClass('active');
+            // ===== Restaurar sección activa al recargar =====
+            const ultimaSeccion = localStorage.getItem('ultimaSeccion');
+            if (ultimaSeccion && $(ultimaSeccion).length > 0) {
+                // Mostrar esa sección
+                $('.seccion-content').hide();
+                $(ultimaSeccion).show();
+
+                // Activar el link de la barra lateral
+                $('.sidebar a').removeClass('active');
+                $(`.sidebar a[href="${ultimaSeccion}"]`).addClass('active');
+            } else {
+                // Si no hay sección guardada, mostrar productos por defecto
+                $('#productos').show();
+                $('.sidebar a[href="#productos"]').addClass('active');
+            }
+
+
+
         });
     </script>
 
@@ -1200,34 +1910,34 @@
             }
         });
     </script>
-<script>
-    $(document).ready(function () {
-    // ... código existente ...
+    <script>
+        $(document).ready(function () {
+            // ... código existente ...
 
-    // Manejar navegación entre secciones
-    $('.sidebar a[href^="#"]').click(function (e) {
-        e.preventDefault();
-        const target = $(this).attr('href');
+            // Manejar navegación entre secciones
+            $('.sidebar a[href^="#"]').click(function (e) {
+                e.preventDefault();
+                const target = $(this).attr('href');
 
-        // Ocultar todas las secciones
-        $('.seccion-content').hide();
+                // Ocultar todas las secciones
+                $('.seccion-content').hide();
 
-        // Mostrar la sección seleccionada
-        $(target).show();
+                // Mostrar la sección seleccionada
+                $(target).show();
 
-        // Si la sección es gastos, cargar los gastos
-        if (target === '#gastos') {
-            cargarGastos();
-        }
+                // Si la sección es gastos, cargar los gastos
+                if (target === '#gastos') {
+                    cargarGastos();
+                }
 
-        // Actualizar clase activa en sidebar
-        $('.sidebar a').removeClass('active');
-        $(this).addClass('active');
-    });
+                // Actualizar clase activa en sidebar
+                $('.sidebar a').removeClass('active');
+                $(this).addClass('active');
+            });
 
-    // ... resto del código ...
-});
-</script>
+            // ... resto del código ...
+        });
+    </script>
 
     <!-- JavaScript para el modal -->
     <script>
@@ -1260,6 +1970,17 @@
                             window.cargarProveedores();
                         }
                     }, 100);
+                }
+                else if (target === '#compras') {
+                    // Cargar compras cuando se muestre la sección
+                    setTimeout(() => {
+                        if (window.cargarCompras) {
+                            window.cargarCompras();
+                        }
+                    }, 100);
+                }
+                else if (target === '#gastos') {
+                    cargarGastos();
                 }
             });
 

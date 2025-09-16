@@ -57,6 +57,7 @@ const urlEstadisticasProveedores = "http://localhost:8000/api/compras/proveedore
 const urlEstadisticasProductos = "http://localhost:8000/api/compras/productos"
 
 
+
 //Usuarios CRUD
 
 export const registrarUsuario = async (datosUsuario) => {
@@ -135,7 +136,203 @@ export const eliminarUsuarios = async (idusuarios) => {
         console.error("Error al eliminar el usuario:", error);
     }
 }
+//Compras CRUD y mas
 
+// Obtener todas las compras con paginación y filtros
+export const getCompras = async (page = 1, limit = 10, idProveedor = null) => {
+    try {
+        let url = `${urlCompras}?page=${page}&limit=${limit}`;
+        if (idProveedor) {
+            url += `&idProveedor=${idProveedor}`;
+        }
+
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error al obtener compras:', error);
+        throw error;
+    }
+};
+
+// Obtener una compra específica por ID
+export const getCompraPorId = async (idCompra) => {
+    try {
+        const response = await fetch(`${urlCompras}/${idCompra}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error al obtener compra por ID:', error);
+        throw error;
+    }
+};
+
+// Registrar una nueva compra
+export const postCompra = async (compraData) => {
+    try {
+        const response = await fetch(urlRegistrarCompra, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(compraData)
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || `Error HTTP: ${response.status}`);
+        }
+
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error al registrar compra:', error);
+        throw error;
+    }
+};
+
+// Actualizar una compra existente
+export const putCompra = async (compraData) => {
+    try {
+        const response = await fetch(urlActualizarCompra, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(compraData)
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || `Error HTTP: ${response.status}`);
+        }
+
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error al actualizar compra:', error);
+        throw error;
+    }
+};
+
+// Eliminar una compra
+export const deleteCompra = async (idCompra) => {
+    try {
+        const response = await fetch(`${urlCompras}/${idCompra}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || `Error HTTP: ${response.status}`);
+        }
+
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error al eliminar compra:', error);
+        throw error;
+    }
+};
+
+// Obtener estadísticas de compras
+export const getEstadisticasCompras = async (fechaInicio = null, fechaFin = null) => {
+    try {
+        let url = urlEstadisticasCompras;
+        const params = new URLSearchParams();
+
+        if (fechaInicio) params.append('fechaInicio', fechaInicio);
+        if (fechaFin) params.append('fechaFin', fechaFin);
+
+        if (params.toString()) {
+            url += `?${params.toString()}`;
+        }
+
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error al obtener estadísticas de compras:', error);
+        throw error;
+    }
+};
+
+// Obtener proveedores para el combo box
+export const getProveedoresForCompras = async () => {
+    try {
+        const response = await fetch(urlEstadisticasProveedores, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error al obtener proveedores para compras:', error);
+        throw error;
+    }
+};
+
+// Obtener productos para el combo box
+export const getProductosForCompras = async () => {
+    try {
+        const response = await fetch(urlEstadisticasProductos, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error al obtener productos para compras:', error);
+        throw error;
+    }
+};
 //Gastos CRUD
 // ✅ Obtener productos para gastos (dropdown)
 export const obtenerProductosParaGastos = async () => {
