@@ -86,12 +86,25 @@ const postCompra = async (req, res) => {
         [idCompra, p.idProducto, p.cantidad, p.precio_unitario, p.subtotal_linea]
       );
 
-      await connection.query(
-        `UPDATE producto
-         SET cantidad = cantidad + ?, precio_costo = ?
-         WHERE idProducto = ?`,
-        [p.cantidad, p.precio_unitario, p.idProducto]
+      // Verificar si ya existe alguna compra del producto
+      const comprasExistentes = await connection.query(
+        "SELECT COUNT(*) AS total FROM detalle_compra WHERE idProducto = ?",
+        [p.idProducto]
       );
+
+      const incrementarValor = comprasExistentes[0].total === 0 ? true : false;
+
+      // Actualizar producto
+      await connection.query(
+  `UPDATE producto
+   SET cantidad = cantidad + ?,
+       precio_costo = ?,
+       idProveedor = ?,
+       valor = CASE WHEN ? THEN ? + valor ELSE valor END,
+       porcentaje_retefuente = ?
+   WHERE idProducto = ?`,
+  [p.cantidad, p.precio_unitario, idProveedor, incrementarValor, p.precio_unitario, porcentajeRetefuente, p.idProducto]
+);
     }
 
     await connection.commit();
@@ -232,7 +245,7 @@ const putCompra = async (req, res) => {
     // Revertir inventario anterior
     const detallesAnteriores = await connection.query("SELECT idProducto, cantidad FROM detalle_compra WHERE idCompra = ?", [idCompra]);
     for (const d of detallesAnteriores) {
-      await connection.query("UPDATE producto SET cantidad = cantidad - ? WHERE idProducto = ?", [d.cantidad, d.idProducto]);
+      await connection.query("UPDATE producto SET cantidad  = cantidad - ?, idProveedor= ?  WHERE idProducto = ?", [d.cantidad, idProveedor, d.idProducto]);
     }
     await connection.query("DELETE FROM detalle_compra WHERE idCompra = ?", [idCompra]);
 
@@ -311,10 +324,7 @@ const deleteCompra = async (req, res) => {
       return res.status(404).json({ success: false, message: "Compra no encontrada" });
     }
 
-    const detalles = await connection.query("SELECT idProducto, cantidad FROM detalle_compra WHERE idCompra = ?", [id]);
-    for (const d of detalles) {
-      await connection.query("UPDATE producto SET cantidad = cantidad - ? WHERE idProducto = ?", [d.cantidad, d.idProducto]);
-    }
+
 
     await connection.query("DELETE FROM compra WHERE idCompra = ?", [id]);
 

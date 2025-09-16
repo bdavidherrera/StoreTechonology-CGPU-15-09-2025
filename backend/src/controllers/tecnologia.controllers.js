@@ -5,7 +5,7 @@ const getTecnologiaProducto = async (req, res)=>{
     try {
         const connection = await getConnection();
         console.log("Conexión obtenida [GET /producto]");
-        const result= await connection.query("SELECT * FROM producto WHERE activo = '1' ")
+        const result= await connection.query("SELECT * FROM producto WHERE activo = '1' AND precio_costo > 0");
         res.json(result) 
     } catch (error) {
         console.error("ERROR 500");
