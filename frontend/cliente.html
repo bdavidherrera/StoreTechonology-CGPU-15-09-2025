@@ -257,7 +257,7 @@
             const idUsuario = sessionStorage.getItem("idUsuario");
             const role = sessionStorage.getItem("rol");
 
-            if (!idUsuario || role !== "cliente") {
+            if (!idUsuario ) {
                 alert(
                     "Debes iniciar sesión para acceder a esta página y ser cliente."
                 );

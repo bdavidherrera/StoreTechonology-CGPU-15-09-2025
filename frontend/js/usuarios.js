@@ -83,8 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (rol === "admin") {  
                 alert("Bienvenido Administrador"); 
                 window.location.href = "admin.html";  
-            } else if (rol === "cliente") {                      
-                alert("Bienvenido Cliente");
+            } else if (rol === "cliente" || rol === "empresa") {                      
+                alert("Bienvenido ");
                 window.location.href = "cliente.html";  
             } else {                     
                 alert("Rol desconocido: " + rol);                 

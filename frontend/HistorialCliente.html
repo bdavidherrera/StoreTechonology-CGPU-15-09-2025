@@ -72,7 +72,7 @@
             const idUsuario = sessionStorage.getItem("idUsuario");
             const role = sessionStorage.getItem("rol");
 
-            if (!idUsuario || role !== "cliente") {
+            if (!idUsuario || role === "admin") {
                 alert("Debes iniciar sesión como cliente para acceder a esta página.");
                 window.location.href = "login.html";
             }

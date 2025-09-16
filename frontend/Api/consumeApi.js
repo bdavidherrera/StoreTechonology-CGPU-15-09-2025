@@ -883,7 +883,7 @@ export async function getHistorialCompras() {
         const idUsuario = sessionStorage.getItem("idUsuario");
         const rol = sessionStorage.getItem("rol");
 
-        if (!idUsuario || rol !== "cliente") {
+        if (!idUsuario || rol === "admin") {
             return { success: false, message: "No autorizado: debes ser cliente" };
         }
 
