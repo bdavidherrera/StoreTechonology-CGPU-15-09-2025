@@ -50,7 +50,19 @@
                         <input type="text" id="telefono" name="telefono" placeholder="Tu telefono completo" required>
                     </div>
 
-                    <input type="hidden" id="rol" name="rol" value="cliente">
+                    <div class="form-group">
+                        <label for="telefono">Empresa</label>
+                        <input type="text" id="empresa_trabaja" name="empresa_trabaja" placeholder="Escribe la empresa que trabajastes">
+                    </div>
+
+                     <div class="form-group">
+                        <select class="form-control" id="rol" name="rol" required>
+                            <option value="" disabled selected>Selecciona tu rol</option>
+                            <option value="cliente">cliente</option>
+                            <option value="empleado">empresa</option>
+                        </select>
+                    </div>
+
 
                     <button type="submit" class="auth-btn">Registrarse</button>
                     <p class="auth-text">¿Ya tienes cuenta? <a href="login.html">Inicia Sesión</a></p>

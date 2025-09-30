@@ -18,7 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
             telefono: document.getElementById("telefono").value,
             password: document.getElementById("password").value,
             activo: "1", // Asignamos un estado por defecto
-            rol: document.getElementById("rol").value
+            rol: document.getElementById("rol").value,
+            empresa_trabaja: document.getElementById("empresa_trabaja").value
         };
 
         try {

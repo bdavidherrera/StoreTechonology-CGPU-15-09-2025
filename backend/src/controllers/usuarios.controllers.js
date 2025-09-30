@@ -2,7 +2,7 @@ import getConnection from "../db/database.js"
 
 const postUsuarios = async (req, res) => {
     try {
-        const { cedula, nombre, correo, direccion, telefono , password, rol } = req.body;
+        const { cedula, nombre, correo, direccion, telefono , password, rol, empresa_trabaja} = req.body;
 
         const usuario = {
             cedula, 
@@ -11,7 +11,8 @@ const postUsuarios = async (req, res) => {
             direccion,
             telefono,
             password, 
-            rol
+            rol,
+            empresa_trabaja
         };
         const connection =  await getConnection();
         console.log("Conexión obtenida [POST /Usuario]");
