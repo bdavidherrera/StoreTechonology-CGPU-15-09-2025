@@ -1,4 +1,4 @@
-// ==================== GASTOS.JS - GESTIÓN DE GASTOS ====================
+// ==================== GASTOS.JS - GESTIÓN DE GASTOS (CORREGIDO) ====================
 import {
   obtenerProductosParaGastos,
   obtenerGastos,
@@ -27,21 +27,18 @@ window.cargarGastos = async function() {
     console.log("📊 Cargando gastos...");
     mostrarCargandoGastos(true);
 
-    // Cargar productos y gastos en paralelo
-    const [productos, gastos] = await Promise.all([
-      obtenerProductosParaGastos(),
-      obtenerGastos()
-    ]);
-
-    productosData = productos;
-    gastosData = gastos;
+    // Cargar productos primero
+    productosData = await obtenerProductosParaGastos();
+    console.log("✅ Productos cargados:", productosData);
+    
+    // Luego cargar gastos
+    gastosData = await obtenerGastos();
+    console.log("✅ Gastos cargados:", gastosData);
 
     // Cargar datos en la interfaz
-    await Promise.all([
-      cargarProductosEnSelect(),
-      mostrarGastosEnTabla(gastos),
-      actualizarEstadisticasGastos()
-    ]);
+    await cargarProductosEnSelect();
+    await mostrarGastosEnTabla(gastosData);
+    await actualizarEstadisticasGastos();
 
     console.log("✅ Gastos cargados exitosamente");
   } catch (error) {
@@ -56,10 +53,26 @@ window.cargarGastos = async function() {
 
 function inicializarEventosGastos() {
   // Evento para abrir modal agregar gasto
-  $(document).on('click', '#btnAgregarGasto', function() {
-    limpiarFormularioGasto();
-    cargarProductosEnSelect();
-    $('#modalAgregarGasto').modal('show');
+  $(document).on('click', '#btnAgregarGasto', async function() {
+    console.log("🔄 Abriendo modal agregar gasto...");
+    
+    try {
+      limpiarFormularioGasto();
+      
+      // Asegurar que los productos estén cargados
+      if (!productosData || productosData.length === 0) {
+        console.log("📦 Cargando productos...");
+        productosData = await obtenerProductosParaGastos();
+      }
+      
+      await cargarProductosEnSelect('#idProducto');
+      $('#modalAgregarGasto').modal('show');
+      
+      console.log("✅ Modal abierto correctamente");
+    } catch (error) {
+      console.error("❌ Error al abrir modal:", error);
+      mostrarErrorGastos("Error al cargar productos: " + error.message);
+    }
   });
 
   // Evento para enviar formulario agregar gasto
@@ -132,7 +145,7 @@ async function procesarFormularioGasto(tipo) {
       gastoData.idGasto = gastoEditando.idGasto;
     }
 
-    console.log(`${tipo === 'agregar' ? '➕' : '📝'} Procesando gasto:`, gastoData);
+    console.log(`${tipo === 'agregar' ? '➕' : '🔄'} Procesando gasto:`, gastoData);
 
     // Enviar datos
     const resultado = tipo === 'agregar' 
@@ -163,23 +176,43 @@ async function editarGasto(idGasto) {
       throw new Error('Gasto no encontrado');
     }
 
+    console.log("📝 Editando gasto:", gasto);
     gastoEditando = gasto;
 
-    // Cargar productos en select
+    // Asegurar que los productos estén cargados
+    if (!productosData || productosData.length === 0) {
+      console.log("📦 Recargando productos para edición...");
+      productosData = await obtenerProductosParaGastos();
+    }
+
+    // Cargar productos en select y esperar
     await cargarProductosEnSelect('#idProductoActualizar');
+    
+    // Pequeña espera para asegurar que el DOM se actualice
+    await new Promise(resolve => setTimeout(resolve, 100));
 
     // Llenar formulario con datos del gasto
     $('#idGastoActualizar').val(gasto.idGasto);
     $('#descripcionActualizar').val(gasto.descripcion);
     $('#montoActualizar').val(gasto.monto);
     $('#categoriaActualizar').val(gasto.categoria || '');
-    $('#idProductoActualizar').val(gasto.idProducto || '');
+    
+    // Establecer el producto seleccionado con logs para debug
+    const idProductoSeleccionado = gasto.idProducto || gasto.id_producto || '';
+    console.log("🔍 Intentando seleccionar producto ID:", idProductoSeleccionado);
+    $('#idProductoActualizar').val(idProductoSeleccionado);
+    console.log("✅ Valor establecido en select:", $('#idProductoActualizar').val());
 
     // Mostrar información del gasto
+    const nombreProducto = idProductoSeleccionado 
+      ? productosData.find(p => p.idProducto == idProductoSeleccionado)?.nombreProducto || 'Sin producto'
+      : 'Sin producto';
+    
     $('#infoGastoActualizar').html(`
       <div class="alert alert-info">
         <i class="fas fa-info-circle"></i>
-        <strong>Editando:</strong> ${gasto.descripcion} - $${formatearMoneda(gasto.monto)}
+        <strong>Editando:</strong> ${gasto.descripcion} - ${formatearMoneda(gasto.monto)}
+        <br><small>Producto asociado: ${nombreProducto}</small>
       </div>
     `);
 
@@ -203,7 +236,7 @@ async function eliminarGastoConfirmado(idGasto) {
     console.log('🗑️ Eliminando gasto ID:', idGasto);
     
     // Mostrar loading
-    $(`button[data-id="${idGasto}"]`).prop('disabled', true).html(
+    $(`.btn-delete-gasto[data-id="${idGasto}"]`).prop('disabled', true).html(
       '<i class="fas fa-spinner fa-spin"></i>'
     );
 
@@ -216,7 +249,7 @@ async function eliminarGastoConfirmado(idGasto) {
     mostrarErrorGastos('Error al eliminar gasto: ' + error.message);
     
     // Restaurar botón
-    $(`button[data-id="${idGasto}"]`).prop('disabled', false).html(
+    $(`.btn-delete-gasto[data-id="${idGasto}"]`).prop('disabled', false).html(
       '<i class="fas fa-trash"></i>'
     );
   }
@@ -244,69 +277,79 @@ async function mostrarGastosEnTabla(gastos) {
   }
 
   gastos.forEach(gasto => {
-    // Soportar varias formas en que la API pueda venir con la fecha / idProducto
-    const fechaRaw = gasto.fecha_creacion ?? gasto.fecha ?? gasto.fechaCreacion ?? null;
-    const fechaHtml = fechaRaw ? `<small class="text-muted">${formatearFecha(fechaRaw)}</small>` : '<span class="text-muted">N/A</span>';
+    // Manejar diferentes formatos de fecha
+    const fechaRaw = gasto.fecha_creacion || gasto.fecha || gasto.fechaCreacion || null;
+    const fechaHtml = fechaRaw 
+      ? `<small class="text-muted">${formatearFecha(fechaRaw)}</small>` 
+      : '<span class="text-muted">N/A</span>';
 
-    const productoId = (gasto.idProducto ?? gasto.id_producto ?? gasto.idproduct);
+    // Manejar diferentes formatos de idProducto
+    const productoId = gasto.idProducto || gasto.id_producto || gasto.idproduct;
     const productoHtml = productoId !== undefined && productoId !== null && productoId !== '' 
       ? productoId 
-      : 'N/A';
+      : '<span class="text-muted">Sin producto</span>';
 
-    const categoriaHtml = gasto.categoria ? 
-      `<span class="badge badge-categoria">${gasto.categoria}</span>` : 
-      '<span class="text-muted">Sin categoría</span>';
+    const categoriaHtml = gasto.categoria 
+      ? `<span class="badge badge-categoria badge-secondary">${gasto.categoria}</span>` 
+      : '<span class="text-muted">Sin categoría</span>';
 
     const fila = `
       <tr class="gasto-row" data-id="${gasto.idGasto}">
         <td class="text-center">${gasto.idGasto}</td>
-        <td><strong>${gasto.descripcion ?? ''}</strong></td>
-        <td class="text-right"><span class="monto-gasto">$${formatearMoneda(gasto.monto ?? 0)}</span></td>
+        <td><strong>${gasto.descripcion || ''}</strong></td>
+        <td class="text-right"><span class="monto-gasto">$${formatearMoneda(gasto.monto || 0)}</span></td>
         <td class="text-center">${categoriaHtml}</td>
         <td class="text-center">${productoHtml}</td>
         <td class="text-center">${fechaHtml}</td>
-        <td >
-          <div class="action-buttons">
-            <button class="btn-action btn-edit btn-edit-gasto" 
-                    data-id="${gasto.idGasto}"
-                    title="Editar gasto">
-              <i class="fas fa-edit"></i>
-            </button>
-            <button class="btn-action btn-delete btn-delete-gasto" 
+        <td class="text-center">
+              <button class="btn-action btn-delete btn-delete-gasto" 
                     data-id="${gasto.idGasto}"
                     data-descripcion="${(gasto.descripcion ?? '').replace(/"/g, '&quot;')}"
                     title="Eliminar gasto">
               <i class="fas fa-trash"></i>
             </button>
-          </div>
         </td>
       </tr>
     `;
     tbody.append(fila);
   });
 
-  // Animación de entrada (requiere jQuery completo, no la versión slim)
-  $('.gasto-row').hide().fadeIn(300);
+  console.log(`✅ Mostrados ${gastos.length} gastos en la tabla`);
 }
-
-
 
 async function cargarProductosEnSelect(selectId = '#idProducto') {
   try {
     const select = $(selectId);
-    select.empty().append('<option value="">Seleccionar producto </option>');
+    select.empty();
+    
+    // Opción por defecto
+    select.append('<option value="">Seleccionar producto (opcional)</option>');
+
+    console.log("Cargando productos en select. Total productos:", productosData.length);
+    console.log("Select ID:", selectId);
 
     if (productosData && productosData.length > 0) {
       productosData.forEach(producto => {
-        select.append(`
-          <option value="${producto.idProducto}">
-            ${producto.nombreProducto}
-          </option>
-        `);
+        const option = `<option value="${producto.idProducto}">${producto.nombreProducto}</option>`;
+        select.append(option);
       });
+      
+      // Verificar que las opciones se agregaron
+      const totalOpciones = select.find('option').length;
+      console.log(`${totalOpciones} opciones en select ${selectId}`);
+      
+      if (totalOpciones > 1) {
+        console.log("Productos cargados correctamente en", selectId);
+      }
+    } else {
+      console.warn("No hay productos disponibles para cargar");
+      select.append('<option value="">No hay productos disponibles</option>');
     }
+    
+    return true;
   } catch (error) {
-    console.error('❌ Error al cargar productos en select:', error);
+    console.error('Error al cargar productos en select:', error);
+    throw error;
   }
 }
 
@@ -316,46 +359,46 @@ async function actualizarEstadisticasGastos() {
     
     const estadisticasHtml = `
       <div class="row">
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-6 mb-3">
           <div class="stat-card bg-primary text-white">
             <div class="stat-icon">
               <i class="fas fa-receipt"></i>
             </div>
             <div class="stat-info">
-              <h4>${estadisticas.totalGastos}</h4>
+              <h4>${estadisticas.totalGastos || 0}</h4>
               <p>Total Gastos</p>
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-6 mb-3">
           <div class="stat-card bg-success text-white">
             <div class="stat-icon">
               <i class="fas fa-money-bill-wave"></i>
             </div>
             <div class="stat-info">
-              <h4>$${formatearMoneda(estadisticas.montoTotal)}</h4>
+              <h4>$${formatearMoneda(estadisticas.montoTotal || 0)}</h4>
               <p>Monto Total</p>
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-6 mb-3">
           <div class="stat-card bg-info text-white">
             <div class="stat-icon">
               <i class="fas fa-calculator"></i>
             </div>
             <div class="stat-info">
-              <h4>$${formatearMoneda(estadisticas.promedioGasto)}</h4>
+              <h4>$${formatearMoneda(estadisticas.promedioGasto || 0)}</h4>
               <p>Promedio por Gasto</p>
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-6 mb-3">
           <div class="stat-card bg-warning text-white">
             <div class="stat-icon">
               <i class="fas fa-tags"></i>
             </div>
             <div class="stat-info">
-              <h4>${Object.keys(estadisticas.gastosPorCategoria).length}</h4>
+              <h4>${Object.keys(estadisticas.gastosPorCategoria || {}).length}</h4>
               <p>Categorías</p>
             </div>
           </div>
@@ -401,7 +444,7 @@ function filtrarPorCategoria(categoria) {
 
   filas.each(function() {
     const fila = $(this);
-    const categoriaGasto = fila.find('.badge-categoria').text();
+    const categoriaGasto = fila.find('.badge-categoria').text().trim();
     
     if (categoriaGasto === categoria) {
       fila.show();
@@ -458,24 +501,36 @@ function validarDescripcion(input) {
 
 // ==================== FUNCIONES UTILITARIAS ====================
 
-function limpiarFormularioGasto() {
+window.limpiarFormularioGasto = function() {
   $('#formAgregarGasto')[0].reset();
   $('.form-control').removeClass('is-valid is-invalid');
   gastoEditando = null;
+  console.log("🧹 Formulario limpiado");
+}
+
+window.limpiarFormularioActualizarGasto = function() {
+  if (gastoEditando) {
+    // Restaurar valores originales
+    $('#descripcionActualizar').val(gastoEditando.descripcion);
+    $('#montoActualizar').val(gastoEditando.monto);
+    $('#categoriaActualizar').val(gastoEditando.categoria || '');
+    $('#idProductoActualizar').val(gastoEditando.idProducto || '');
+  }
+  $('.form-control').removeClass('is-valid is-invalid');
+  console.log("🧹 Formulario de actualización restablecido");
 }
 
 function mostrarCargandoGastos(mostrar) {
   if (mostrar) {
     $('#cargandoGastos').show();
-    $('#tablaGastos').hide();
+    $('#tablaGastos').parent().hide();
   } else {
     $('#cargandoGastos').hide();
-    $('#tablaGastos').show();
+    $('#tablaGastos').parent().show();
   }
 }
 
 function mostrarMensajeExito(mensaje) {
-  // Usar SweetAlert si está disponible, sino usar alert
   if (typeof Swal !== 'undefined') {
     Swal.fire({
       icon: 'success',
@@ -490,7 +545,6 @@ function mostrarMensajeExito(mensaje) {
 }
 
 function mostrarErrorGastos(mensaje) {
-  // Usar SweetAlert si está disponible, sino usar alert
   if (typeof Swal !== 'undefined') {
     Swal.fire({
       icon: 'error',
@@ -512,17 +566,21 @@ function formatearMoneda(monto) {
 function formatearFecha(fecha) {
   if (!fecha) return 'N/A';
   
-  const date = new Date(fecha);
-  return new Intl.DateTimeFormat('es-CO', {
-    year: 'numeric',
-    month: 'short',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit'
-  }).format(date);
+  try {
+    const date = new Date(fecha);
+    return new Intl.DateTimeFormat('es-CO', {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit'
+    }).format(date);
+  } catch (error) {
+    console.error('Error al formatear fecha:', error);
+    return 'N/A';
+  }
 }
 
-
-// Exportaciones globales para uso en HTML
+// Exportaciones globales
 window.cargarGastos = cargarGastos;
 window.limpiarFormularioGasto = limpiarFormularioGasto;

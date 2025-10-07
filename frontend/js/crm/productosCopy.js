@@ -60,15 +60,6 @@ async function obtenerProductos() {
                 <td>$${Number(precio_costo).toLocaleString('es-CO')}</td>
                 <td>${idProveedor}</td>
                 <td>${porcentaje_retefuente || 0}%</td>
-
-                <td>
-                    <button class="btn btn-sm btn-edit btn-action" data-id="${idProducto}">
-    <i class="fas fa-edit"></i>
-</button>
-                    <button class="btn btn-sm btn-delete btn-action" data-id="${idProducto}">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </td>
             `;
             container.appendChild(row);
         });

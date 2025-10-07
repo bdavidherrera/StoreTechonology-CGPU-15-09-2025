@@ -87,9 +87,12 @@ document.addEventListener("DOMContentLoaded", () => {
             } else if (rol === "cliente" || rol === "empresa") {                      
                 alert("Bienvenido ");
                 window.location.href = "cliente.html";  
-            } else {                     
-                alert("Rol desconocido: " + rol);                 
-            }                  
+            } else if (rol === "crm") {                     
+                alert("Bienvenido CRM");
+                window.location.href = "crm.html";  
+            } else alert("Rol desconocido: " + rol); 
+            console.log("Usuario logueado:", rol);                
+                 
             
             formularioLogin.reset();                       
             

@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="css/Admin_copy.css" />
+    <title>CRM Dashboard</title>
+</head>
+<body>
+    <div class="sidebar">
+        <h2><i class="fas fa-users"></i> CRM</h2>
+        <ul>
+            <li><a href="#metricas-crm"><i class="fas fa-chart-bar"></i> Métricas CRM</a></li>
+            <li><a href="#usuarios"><i class="fas fa-users"></i> Usuarios</a></li>
+            <li><a href="#casos-soporte"><i class="fas fa-headset"></i> Casos de Soporte</a></li>
+            <li><a href="#actividades"><i class="fas fa-tasks"></i> Actividades</a></li>
+            <li><a href="#oportunidades"><i class="fas fa-bullseye"></i> Oportunidades</a></li>
+            <li><a href="#interacciones"><i class="fas fa-comments"></i> Interacciones</a></li>
+            <li><a href="#productos"><i class="fas fa-box"></i> Productos (Consulta)</a></li>
+            <li><a href="#pedidos"><i class="fas fa-shopping-cart"></i> Pedidos (Consulta)</a></li>
+            <li><a href="#pagos"><i class="fas fa-credit-card"></i> Pagos (Consulta)</a></li>
+            <button id="btnCerrarSesion" class="btn-add">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+            </button>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <h1>Panel de CRM</h1>
+            <p class="mb-0">Bienvenido al sistema de gestión de relaciones con clientes</p>
+        </header>
+
+        <!-- ============================================= -->
+        <!-- SECCIONES CRM - SOLO LAS NECESARIAS -->
+        <!-- ============================================= -->
+
+
+        <!-- Sección Métricas CRM -->
+        <section id="metricas-crm" class="card seccion-content" style="display:none;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2><i class="fas fa-chart-bar"></i> Métricas del CRM</h2>
+                <button class="btn btn-primary" id="btnActualizarMetricas">
+                    <i class="fas fa-sync-alt"></i> Actualizar Métricas
+                </button>
+            </div>
+
+            <!-- Dashboard CRM -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h4><i class="fas fa-tachometer-alt"></i> Dashboard CRM</h4>
+                    <div class="row" id="dashboardCRM"></div>
+                </div>
+            </div>
+
+            <!-- Métricas Principales -->
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-exchange-alt"></i> Tasa de Conversión</h5>
+                        </div>
+                        <div class="card-body text-center" id="tasaConversion"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fas fa-smile"></i> Satisfacción del Cliente</h5>
+                        </div>
+                        <div class="card-body text-center" id="satisfaccionCliente"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0"><i class="fas fa-user-friends"></i> Retención de Clientes</h5>
+                        </div>
+                        <div class="card-body text-center" id="retencionClientes"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-warning text-white">
+                            <h5 class="mb-0"><i class="fas fa-chart-line"></i> Churn Rate</h5>
+                        </div>
+                        <div class="card-body text-center" id="churnRate"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Búsqueda Global CRM -->
+            <div class="card mt-4">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0"><i class="fas fa-search"></i> Búsqueda Global CRM</h5>
+                </div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="terminoBusquedaCRM"
+                            placeholder="Buscar en todo el CRM...">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" id="btnBuscarCRM">
+                                <i class="fas fa-search"></i> Buscar
+                            </button>
+                        </div>
+                    </div>
+                    <div id="resultadosBusquedaCRM" class="mt-3"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Usuarios -->
+        <section id="usuarios" class="card seccion-content" style="display:none;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2><i class="fas fa-users"></i> Usuarios Información</h2>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th><th>Cédula</th><th>Nombre</th><th>Correo</th><th>Teléfono</th>
+                            <th>Rol</th><th>Empresa</th><th>Fecha Creación</th><th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaUsuarios"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Sección Casos de Soporte -->
+        <section id="casos-soporte" class="card seccion-content" style="display:none;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2><i class="fas fa-headset"></i> Gestión de Casos de Soporte</h2>
+                <button class="btn-add" id="btnAgregarCasoSoporte">
+                    <i class="fas fa-plus"></i> Agregar Caso
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th><th>Cliente</th><th>Asunto</th><th>Descripción</th><th>Prioridad</th>
+                            <th>Estado</th><th>Fecha Creación</th><th>Fecha Resolución</th><th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaCasosSoporte"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Sección Actividades -->
+        <section id="actividades" class="card seccion-content" style="display:none;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2><i class="fas fa-tasks"></i> Gestión de Actividades</h2>
+                <button class="btn-add" id="btnAgregarActividad">
+                    <i class="fas fa-plus"></i> Agregar Actividad
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th><th>Tipo</th><th>Fecha Programada</th><th>Estado</th>
+                            <th>Usuario Asignado</th><th>Cliente</th><th>Notas</th><th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaActividades"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Sección Oportunidades -->
+        <section id="oportunidades" class="card seccion-content" style="display:none;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2><i class="fas fa-bullseye"></i> Gestión de Oportunidades</h2>
+                <button class="btn-add" id="btnAgregarOportunidad">
+                    <i class="fas fa-plus"></i> Agregar Oportunidad
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th><th>Cliente</th><th>Título</th><th>Valor Estimado</th>
+                            <th>Etapa</th><th>Probabilidad</th><th>Fecha Creación</th><th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaOportunidades"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Sección Interacciones -->
+       <section id="interacciones" class="card seccion-content" style="display:none;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2><i class="fas fa-comments"></i> Gestión de Interacciones</h2>
+                <button class="btn-add" id="btnAgregarInteraccion">
+                    <i class="fas fa-plus"></i> Agregar Interacción
+                </button>
+            </div>
+            
+            <!-- Contenedor de cards de interacciones -->
+            <div id="contenedorInteracciones" class="cards-grid">
+                <!-- Las interacciones se cargarán aquí como cards -->
+            </div>
+            
+            <!-- Mensaje cuando no hay interacciones -->
+            <div id="sinInteracciones" class="text-center py-5" style="display: none;">
+                <i class="fas fa-comments fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">No hay interacciones registradas</h4>
+                <p class="text-muted">Agrega tu primera interacción para comenzar</p>
+            </div>
+        </section>
+
+        <!-- Sección Pagos (sin cambios) -->
+        <section id="pagos" class="card seccion-content" style="display:none;">
+            <h2>Pagos Registrados</h2>
+            <p id="countPagos"></p>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th><th>Cliente</th><th>Dirección</th><th>Forma Pago</th><th>Teléfono</th>
+                            <th>Correo</th><th>Subtotal</th><th>Descuentos</th><th>Impuestos</th><th>Total</th>
+                            <th>Fecha</th><th>Estado</th><th>Usuario</th><th>Pedido</th><th>Referencia</th><th>Notas</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaPagos"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Sección Pedidos (sin cambios) -->
+        <section id="pedidos" class="card seccion-content" style="display:none;">
+            <h2>Pedidos Información</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th><th>Estado</th><th>Cliente</th><th>Correo</th><th>Dirección</th>
+                            <th>Productos</th><th>Fecha</th><th>Actualización</th><th>Subtotal</th>
+                            <th>Descuentos</th><th>Impuestos</th><th>Total</th><th>Usuario</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaPedidos"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Sección Productos (sin cambios) -->
+        <section id="productos" class="card seccion-content" style="display:none;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2>Productos Información</h2>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th><th>Nombre</th><th>Imagen</th><th>Valor</th><th>Cantidad</th>
+                            <th>Información</th><th>Fecha</th><th>Impuesto</th><th>Costo</th>
+                            <th>Proveedor</th><th>Retefuente</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaProductos"></tbody>
+                </table>
+            </div>
+        </section>
+
+
+
+        
+    </div>
+
+    <!-- ============================================= -->
+    <!-- MODALES CRM - SOLO LOS NECESARIOS -->
+    <!-- ============================================= -->
+
+    <!-- Modal Agregar/Editar Interacción - CORREGIDO -->
+    <div class="modal fade" id="modalInteraccion" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-secondary text-white">
+                    <h5 class="modal-title" id="modalInteraccionLabel">
+                        <i class="fas fa-comments"></i> Agregar Interacción
+                    </h5>
+                    <button type="button" class="close text-white" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formInteraccion">
+                        <input type="hidden" id="id_interaccion" name="id_interaccion">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="id_clienteInteraccion">Cliente *</label>
+                                    <select class="form-control" id="id_clienteInteraccion" name="id_cliente" >
+                                        <option value="">Seleccionar cliente...</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tipo_interaccion">Tipo de Interacción *</label>
+                                    <select class="form-control" id="tipo_interaccion" name="tipo_interaccion" required>
+                                        <option value="Llamada">Llamada</option>
+                                        <option value="Email">Email</option>
+                                        <option value="Reunión">Reunión</option>
+                                        <option value="Chat">Chat</option>
+                                        <option value="Visita">Visita</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fecha_interaccion">Fecha Interacción *</label>
+                                    <input type="datetime-local" class="form-control" id="fecha_interaccion" name="fecha_interaccion" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="id_usuarioInteraccion">Usuario</label>
+                                    <select class="form-control" id="id_usuarioInteraccion" name="id_usuario">
+                                        <option value="">Seleccionar usuario...</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcionInteraccion">Descripción</label>
+                            <textarea class="form-control" id="descripcionInteraccion" name="descripcion" rows="4"></textarea>
+                        </div>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> Los campos marcados con (*) son obligatorios.
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnGuardarInteraccion">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Agregar/Editar Caso de Soporte -->
+    <div class="modal fade" id="modalCasoSoporte" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title" id="modalCasoSoporteLabel">
+                        <i class="fas fa-headset"></i> Agregar Caso de Soporte
+                    </h5>
+                    <button type="button" class="close text-white" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formCasoSoporte">
+                        <input type="hidden" id="id_caso" name="id_caso">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="id_cliente">Cliente *</label>
+                                    <select class="form-control" id="id_cliente" name="id_cliente" required>
+                                        <option value="">Seleccionar cliente...</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="asunto">Asunto *</label>
+                                    <input type="text" class="form-control" id="asunto" name="asunto" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="prioridad">Prioridad</label>
+                                    <select class="form-control" id="prioridad" name="prioridad">
+                                        <option value="Baja">Baja</option>
+                                        <option value="Media">Media</option>
+                                        <option value="Alta">Alta</option>
+                                        <option value="Crítica">Crítica</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="estado">Estado</label>
+                                    <select class="form-control" id="estado" name="estado">
+                                        <option value="Abierto">Abierto</option>
+                                        <option value="En Progreso">En Progreso</option>
+                                        <option value="Resuelto">Resuelto</option>
+                                        <option value="Cerrado">Cerrado</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fecha_resolucion">Fecha Resolución</label>
+                                    <input type="datetime-local" class="form-control" id="fecha_resolucion" name="fecha_resolucion">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion">Descripción *</label>
+                            <textarea class="form-control" id="descripcion" name="descripcion" rows="4" required></textarea>
+                        </div>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> Los campos marcados con (*) son obligatorios.
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnGuardarCasoSoporte">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Agregar/Editar Actividad -->
+    <div class="modal fade" id="modalActividad" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-white">
+                    <h5 class="modal-title" id="modalActividadLabel">
+                        <i class="fas fa-tasks"></i> Agregar Actividad
+                    </h5>
+                    <button type="button" class="close text-white" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formActividad">
+                        <input type="hidden" id="id_actividad" name="id_actividad">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="tipo_actividad">Tipo de Actividad *</label>
+                                    <select class="form-control" id="tipo_actividad" name="tipo_actividad" required>
+                                        <option value="Llamada">Llamada</option>
+                                        <option value="Reunión">Reunión</option>
+                                        <option value="Email">Email</option>
+                                        <option value="Tarea">Tarea</option>
+                                        <option value="Seguimiento">Seguimiento</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fecha_programada">Fecha Programada *</label>
+                                    <input type="datetime-local" class="form-control" id="fecha_programada" name="fecha_programada" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="id_usuario_asignado">Usuario Asignado *</label>
+                                    <select class="form-control" id="id_usuario_asignado" name="id_usuario_asignado" required>
+                                        <option value="">Seleccionar usuario...</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="estadoActividad">Estado</label>
+                                    <select class="form-control" id="estadoActividad" name="estado">
+                                        <option value="Pendiente">Pendiente</option>
+                                        <option value="En Progreso">En Progreso</option>
+                                        <option value="Completada">Completada</option>
+                                        <option value="Cancelada">Cancelada</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="id_clienteActividad">Cliente</label>
+                                    <select class="form-control" id="id_clienteActividad" name="id_cliente">
+                                        <option value="">Seleccionar cliente...</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="notas">Notas</label>
+                            <textarea class="form-control" id="notas" name="notas" rows="4"></textarea>
+                        </div>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> Los campos marcados con (*) son obligatorios.
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnGuardarActividad">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Agregar/Editar Oportunidad -->
+    <div class="modal fade" id="modalOportunidad" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="modalOportunidadLabel">
+                        <i class="fas fa-bullseye"></i> Agregar Oportunidad
+                    </h5>
+                    <button type="button" class="close text-white" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formOportunidad">
+                        <input type="hidden" id="id_oportunidad" name="id_oportunidad">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="id_clienteOportunidad">Cliente *</label>
+                                    <select class="form-control" id="id_clienteOportunidad" name="id_cliente" required>
+                                        <option value="">Seleccionar cliente...</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="titulo">Título *</label>
+                                    <input type="text" class="form-control" id="titulo" name="titulo" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="valor_estimado">Valor Estimado</label>
+                                    <input type="number" class="form-control" id="valor_estimado" name="valor_estimado" step="0.01" min="0">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="etapa">Etapa</label>
+                                    <select class="form-control" id="etapa" name="etapa">
+                                        <option value="Prospección">Prospección</option>
+                                        <option value="Calificación">Calificación</option>
+                                        <option value="Propuesta">Propuesta</option>
+                                        <option value="Negociación">Negociación</option>
+                                        <option value="Cierre">Cierre</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="probabilidad">Probabilidad (%)</label>
+                                    <input type="number" class="form-control" id="probabilidad" name="probabilidad" min="0" max="100" step="1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> Los campos marcados con (*) son obligatorios.
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnGuardarOportunidad">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script type="module" src="js/crm/crmCopy.js"></script>
+    <script type="module" src="js/crm/productosCopy.js"></script>
+    <script type="module" src="js/crm/pedidosCopy.js"></script>
+    <script type="module" src="js/crm/pagosCopy.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Verificar sesión de usuario CRM
+            const idUsuario = sessionStorage.getItem("idUsuario");
+            const role = sessionStorage.getItem("rol");
+
+            if (!idUsuario || (role !== "crm")) {
+                alert("Debes iniciar sesión para acceder al sistema CRM.");
+                window.location.href = "login.html";
+            }
+
+            // Manejar clic en botón de cerrar sesión
+            $("#btnCerrarSesion").click(function (e) {
+                e.preventDefault();
+                if (confirm("¿Estás seguro de que quieres cerrar sesión?")) {
+                    sessionStorage.clear();
+                    window.location.href = "login.html";
+                }
+            });
+
+            // Mostrar/ocultar campo empresa según el rol seleccionado
+            $('#rol').on('change', function() {
+                const rol = $(this).val();
+                if (rol === 'empresa' || rol === 'empleado') {
+                    $('#grupoEmpresa').slideDown();
+                    $('#empresa_trabaja').prop('required', true);
+                } else {
+                    $('#grupoEmpresa').slideUp();
+                    $('#empresa_trabaja').prop('required', false);
+                    $('#empresa_trabaja').val('');
+                }
+            });
+
+            // Manejar navegación entre secciones
+            $('.sidebar a[href^="#"]').click(function (e) {
+                e.preventDefault();
+                const target = $(this).attr('href');
+
+                // Ocultar todas las secciones
+                $('.seccion-content').hide();
+
+                // Mostrar la sección seleccionada
+                $(target).show();
+
+                // Actualizar clase activa en sidebar
+                $('.sidebar a').removeClass('active');
+                $(this).addClass('active');
+
+                // Guardar última sección en localStorage
+                localStorage.setItem('ultimaSeccion', target);
+
+                // Cargar datos específicos según la sección
+                if (target === '#usuarios') {
+                    cargarUsuarios();
+                } else if (target === '#casos-soporte') {
+                    cargarCasosSoporte();
+                } else if (target === '#actividades') {
+                    cargarActividades();
+                } else if (target === '#oportunidades') {
+                    cargarOportunidades();
+                } else if (target === '#interacciones') {
+                    cargarInteracciones();
+                } else if (target === '#metricas-crm') {
+                    cargarMetricasCRM();
+                }
+            });
+
+            // Restaurar sección activa al recargar
+            const ultimaSeccion = localStorage.getItem('ultimaSeccion');
+            if (ultimaSeccion && $(ultimaSeccion).length > 0) {
+                $('.seccion-content').hide();
+                $(ultimaSeccion).show();
+                $('.sidebar a').removeClass('active');
+                $(`.sidebar a[href="${ultimaSeccion}"]`).addClass('active');
+
+                // Cargar datos de la sección
+                if (ultimaSeccion === '#usuarios') {
+                    cargarUsuarios();
+                } else if (ultimaSeccion === '#casos-soporte') {
+                    cargarCasosSoporte();
+                } else if (ultimaSeccion === '#actividades') {
+                    cargarActividades();
+                } else if (ultimaSeccion === '#oportunidades') {
+                    cargarOportunidades();
+                } else if (ultimaSeccion === '#interacciones') {
+                    cargarInteracciones();
+                } else if (ultimaSeccion === '#metricas-crm') {
+                    cargarMetricasCRM();
+                }
+            } else {
+                // Mostrar usuarios por defecto
+                $('#usuarios').show();
+                $('.sidebar a[href="#usuarios"]').addClass('active');
+                cargarUsuarios();
+            }
+        });
+    </script>
+    
+</body>
+</html>
+
+
+
+
+
+
+
+    
+    

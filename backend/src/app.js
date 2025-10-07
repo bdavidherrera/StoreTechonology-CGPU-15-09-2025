@@ -12,10 +12,9 @@ import ventasRoutes from "./routers/ventas.routes.js";
 import proveedorRoutes from "./routers/proveedor.routes.js";
 import gastosRouter from "./routers/gastos.routes.js";
 import comprasRoutes from "./routers/compras.routes.js"
-
-
-
-
+import crmRoutes from "./routers/crm.routes.js"
+import analyticsRoutes from './routers/analytics.routes.js'; // 👈 AGREGAR ESTA LÍNEA
+import analyticsClienteRoutes from './routers/analyticsCliente.routes.js'; // 👈 AGREGAR ESTA LÍNEA
 
 /*Asignamos a app toda funcionalidad para mi server web */
 const app = express();
@@ -71,7 +70,14 @@ app.use("/", getHistorialCompra)
 /*Ventas */
 app.use("/api/ventas", ventasRoutes);
 
+/*CRM */
+app.use("/api/crm", crmRoutes);
 
+/*Analytics */
+app.use('/api/analytics', analyticsRoutes); 
+
+/*Analytics Cliente */
+app.use('/api/analytics-cliente', analyticsClienteRoutes);
 
 app.get("/",(req,res)=>{
     res.send("Manuel Isaac Gomez Galvis y Herrera Barajas Brayan David B191")

@@ -46,7 +46,7 @@ const getUsuriosAdmin= async (req, res)=>{
     try {
         const connection = await getConnection();
         console.log("Conexión obtenida [GET /UsuariosAdmin]");
-        const result= await connection.query("SELECT * FROM usuario WHERE rol= 'cliente' AND activo = 1")
+        const result= await connection.query("SELECT * FROM usuario where activo=1 and rol !='admin' ")
         res.json(result) 
         
     } catch (error) {
@@ -58,7 +58,7 @@ const getUsuriosAdmin= async (req, res)=>{
 
 const putUsuarios = async (req, res) => {
     try {
-        const { idUsuario, cedula, correo, nombre, password, rol, fecha_creacion, activo } = req.body;
+        const { idUsuario, cedula, correo, nombre, password, rol, empresa_trabaja} = req.body;
 
         const usuario = {
             idUsuario, 
@@ -66,9 +66,8 @@ const putUsuarios = async (req, res) => {
             correo, 
             nombre, 
             password, 
-            rol, 
-            fecha_creacion, 
-            activo
+            rol,
+            empresa_trabaja
         };
         const connection =  await getConnection();
         console.log("Conexión obtenida [PUT /Usuarios]");

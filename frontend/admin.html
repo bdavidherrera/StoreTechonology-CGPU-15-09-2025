@@ -1,43 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="Description" content="Enter your description here" />
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="stylesheet" href="css/Admin.css" />
-    <title>AdminDashboard</title>
+    <title>Admin Dashboard</title>
 </head>
-
 <body>
     <div class="sidebar">
         <h2><i class="fas fa-cogs"></i> Admin</h2>
         <ul>
-            <li>
-                <a href="#productos"><i class="fas fa-box"></i> Productos</a>
-            </li>
-            <li>
-                <a href="#pedidos"><i class="fas fa-shopping-cart"></i> Pedidos</a>
-            </li>
-            <li>
-                <a href="#pagos"><i class="fas fa-credit-card"></i> Pagos</a>
-            </li>
-            <li>
-                <a href="#ventas"><i class="fas fa-chart-line"></i> Ventas</a>
-            </li>
-            <li>
-                <a href="#proveedores"><i class="fas fa-building"></i> Proveedores</a>
-            </li>
-            <li>
-                <a href="#gastos"><i class="fas fa-money-bill-wave"></i> Gastos</a>
-            </li>
-            <li>
-                <a href="#compras"><i class="fas fa-truck"></i> Compras</a>
-            </li>
+            <li><a href="#productos"><i class="fas fa-box"></i> Productos</a></li>
+            <li><a href="#pedidos"><i class="fas fa-shopping-cart"></i> Pedidos</a></li>
+            <li><a href="#pagos"><i class="fas fa-credit-card"></i> Pagos</a></li>
+            <li><a href="#ventas"><i class="fas fa-chart-line"></i> Ventas</a></li>
+            <li><a href="#proveedores"><i class="fas fa-building"></i> Proveedores</a></li>
+            <li><a href="#gastos"><i class="fas fa-money-bill-wave"></i> Gastos</a></li>
+            <li><a href="#compras"><i class="fas fa-truck"></i> Compras</a></li>
+            <li><a href="#usuarios"><i class="fas fa-users"></i> Usuarios</a></li>
+            <li><a href="#casos-soporte"><i class="fas fa-headset"></i> Casos de Soporte</a></li>
+            <li><a href="#actividades"><i class="fas fa-tasks"></i> Actividades</a></li>
+            <li><a href="#oportunidades"><i class="fas fa-bullseye"></i> Oportunidades</a></li>
+            <li><a href="#interacciones"><i class="fas fa-comments"></i> Interacciones</a></li>
+            <li><a href="#metricas-crm"><i class="fas fa-chart-bar"></i> Métricas CRM</a></li>
+            <li> <a href="analytics.html"> <i class="fas fa-chart-line"></i> Visual Analytics</a></li>
             <button id="btnCerrarSesion" class="btn-add">
                 <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
             </button>
@@ -50,31 +39,21 @@
             <p class="mb-0">Bienvenido al sistema de gestión</p>
         </header>
 
-        <!-- Sección Productos -->
-        <section id="productos" class="card seccion-content">
+        <!-- Sección Productos (sin cambios) -->
+        <section id="productos" class="card seccion-content" style="display:none;">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h2>Gestión de Productos</h2>
                 <button class="btn-add" id="btnAgregarProducto">
                     <i class="fas fa-plus"></i> Agregar Producto
                 </button>
             </div>
-
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>idProducto</th>
-                            <th>nombreProducto</th>
-                            <th>imagen</th>
-                            <th>valor</th>
-                            <th>cantidad</th>
-                            <th>informacion</th>
-                            <th>fecha_creacion</th>
-                            <th>pocentaje_impuesto</th>
-                            <th>precio_costo</th>
-                            <th>idProveedor</th>
-                            <th>porcentaje_retefuente</th>
-                            <th>Acciones</th>
+                            <th>ID</th><th>Nombre</th><th>Imagen</th><th>Valor</th><th>Cantidad</th>
+                            <th>Información</th><th>Fecha</th><th>Impuesto</th><th>Costo</th>
+                            <th>Proveedor</th><th>Retefuente</th><th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody id="tablaProductos"></tbody>
@@ -82,26 +61,16 @@
             </div>
         </section>
 
-        <!-- Sección Pedidos -->
-        <section id="pedidos" class="card seccion-content">
+        <!-- Sección Pedidos (sin cambios) -->
+        <section id="pedidos" class="card seccion-content" style="display:none;">
             <h2>Gestión de Pedidos</h2>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>idPedido</th>
-                            <th>estado</th>
-                            <th>infopersona</th>
-                            <th>correo</th>
-                            <th>Direccion</th>
-                            <th>nombresProductos</th>
-                            <th>fecha_pedido</th>
-                            <th>fecha_actualizacion</th>
-                            <th>subtotal</th>
-                            <th>descuentos_totales</th>
-                            <th>impuestos_totales</th>
-                            <th>total</th>
-                            <th>idUsuario</th>
+                            <th>ID</th><th>Estado</th><th>Cliente</th><th>Correo</th><th>Dirección</th>
+                            <th>Productos</th><th>Fecha</th><th>Actualización</th><th>Subtotal</th>
+                            <th>Descuentos</th><th>Impuestos</th><th>Total</th><th>Usuario</th>
                         </tr>
                     </thead>
                     <tbody id="tablaPedidos"></tbody>
@@ -109,30 +78,17 @@
             </div>
         </section>
 
-        <!-- Sección Pagos -->
-        <section id="pagos" class="card seccion-content">
+        <!-- Sección Pagos (sin cambios) -->
+        <section id="pagos" class="card seccion-content" style="display:none;">
             <h2>Pagos Registrados</h2>
             <p id="countPagos"></p>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>id</th>
-                            <th>NombrePersona</th>
-                            <th>Direccion</th>
-                            <th>idFormaPago</th>
-                            <th>Telefono</th>
-                            <th>correo_electronico</th>
-                            <th>monto_subtotal</th>
-                            <th>descuentos</th>
-                            <th>impuestos</th>
-                            <th>monto_total</th>
-                            <th>fecha</th>
-                            <th>estado</th>
-                            <th>idUsuario</th>
-                            <th>idPedido</th>
-                            <th>referencia</th>
-                            <th>notas</th>
+                            <th>ID</th><th>Cliente</th><th>Dirección</th><th>Forma Pago</th><th>Teléfono</th>
+                            <th>Correo</th><th>Subtotal</th><th>Descuentos</th><th>Impuestos</th><th>Total</th>
+                            <th>Fecha</th><th>Estado</th><th>Usuario</th><th>Pedido</th><th>Referencia</th><th>Notas</th>
                         </tr>
                     </thead>
                     <tbody id="tablaPagos"></tbody>
@@ -140,39 +96,29 @@
             </div>
         </section>
 
-        <!--Sección de proveedores -->
-        <section id="proveedores" class="card seccion-content">
+        <!-- Sección Proveedores (sin cambios) -->
+        <section id="proveedores" class="card seccion-content" style="display:none;">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h2><i class="fas fa-building"></i> Gestión de Proveedores</h2>
                 <button class="btn-add" id="btnAgregarProveedor">
                     <i class="fas fa-plus"></i> Agregar Proveedor
                 </button>
             </div>
-
-
-
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>NIT</th>
-                            <th>Dirección</th>
-                            <th>Contacto</th>
-                            <th>% Retención</th>
-                            <th>Acciones</th>
+                            <th>ID</th><th>Nombre</th><th>NIT</th><th>Dirección</th>
+                            <th>Contacto</th><th>% Retención</th><th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody id="tablaProveedores">
-                        <!-- Los proveedores se cargarán aquí dinámicamente -->
-                    </tbody>
+                    <tbody id="tablaProveedores"></tbody>
                 </table>
             </div>
         </section>
 
-        <!-- Sección Ventas -->
-        <section id="ventas" class="card seccion-content">
+        <!-- Sección Ventas (sin cambios significativos) -->
+        <section id="ventas" class="card seccion-content" style="display:none;">
             <div class="ventas-header">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2><i class="fas fa-chart-line"></i> Gestión de Ventas</h2>
@@ -182,30 +128,20 @@
                         </button>
                     </div>
                 </div>
-
-                <!-- Estadísticas Generales -->
-                <div id="estadisticasGenerales" class="estadisticas-container mb-4">
-                    <!-- Las estadísticas se cargarán aquí dinámicamente -->
-                </div>
-
-                <!-- Filtros de Fecha -->
+                <div id="estadisticasGenerales" class="estadisticas-container mb-4"></div>
                 <div class="filtros-ventas card mb-4">
                     <div class="card-body">
                         <h5 class="card-title"><i class="fas fa-filter"></i> Filtrar Ventas por Fecha</h5>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="fechaInicio">
-                                        <i class="fas fa-calendar-alt"></i> Fecha Inicio
-                                    </label>
+                                    <label for="fechaInicio"><i class="fas fa-calendar-alt"></i> Fecha Inicio</label>
                                     <input type="date" class="form-control" id="fechaInicio" name="fechaInicio">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="fechaFin">
-                                        <i class="fas fa-calendar-alt"></i> Fecha Fin
-                                    </label>
+                                    <label for="fechaFin"><i class="fas fa-calendar-alt"></i> Fecha Fin</label>
                                     <input type="date" class="form-control" id="fechaFin" name="fechaFin">
                                 </div>
                             </div>
@@ -223,61 +159,38 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Estadísticas del Período -->
-                        <div id="estadisticasPeriodo" style="display: none;">
-                            <!-- Se mostrarán las estadísticas del período filtrado -->
-                        </div>
+                        <div id="estadisticasPeriodo" style="display: none;"></div>
                     </div>
                 </div>
             </div>
-
-            <!-- Loading Indicator -->
             <div id="cargandoVentas" class="text-center py-4" style="display: none;">
                 <div class="spinner-border text-primary" role="status">
                     <span class="sr-only">Cargando...</span>
                 </div>
                 <p class="mt-2">Cargando ventas...</p>
             </div>
-
-            <!-- Tabla de Ventas -->
             <div class="table-responsive">
                 <table class="table table-hover ventas-table">
                     <thead class="thead-dark">
                         <tr>
-                            <th>ID</th>
-                            <th>Cliente</th>
-                            <th>Pedido</th>
-                            <th>Productos</th>
-                            <th>Subtotal</th>
-                            <th>Descuentos</th>
-                            <th>Impuestos</th>
-                            <th>Total</th>
-                            <th>Estado</th>
-                            <th>Fecha</th>
-                            <th>costo_total</th>
-                            <th>Utilidad</th>
-                            <th>Retencion Fuente</th>
-                            <th>Acciones</th>
+                            <th>ID</th><th>Cliente</th><th>Pedido</th><th>Productos</th><th>Subtotal</th>
+                            <th>Descuentos</th><th>Impuestos</th><th>Total</th><th>Estado</th><th>Fecha</th>
+                            <th>Costo Total</th><th>Utilidad</th><th>Retención</th><th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody id="tablaVentas">
-                        <!-- Las ventas se cargarán aquí dinámicamente -->
-                    </tbody>
+                    <tbody id="tablaVentas"></tbody>
                 </table>
             </div>
         </section>
 
-        <!-- Sección Gastos -->
-        <section id="gastos" class="card seccion-content">
+        <!-- Sección Gastos (sin cambios) -->
+        <section id="gastos" class="card seccion-content" style="display:none;">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2><i class="fas fa-money-bill-wave"></i> Gestión de Gastos</h2>
                 <button class="btn-add" id="btnAgregarGasto">
                     <i class="fas fa-plus"></i> Agregar Gasto
                 </button>
             </div>
-
-            <!-- Filtros y búsqueda -->
             <div class="row mb-4">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -293,48 +206,34 @@
                     <div class="form-group">
                         <select class="form-control" id="filtroCategoria">
                             <option value="">Todas las categorías</option>
-                            <option value="publicidad">publicidad</option>
+                            <option value="publicidad">Publicidad</option>
                             <option value="Mantener">Mantener</option>
                         </select>
                     </div>
                 </div>
             </div>
-
-            <!-- Estadísticas de Gastos -->
-            <div id="estadisticasGastos" class="estadisticas-container mb-4">
-                <!-- Las estadísticas se cargarán aquí dinámicamente -->
-            </div>
-
-            <!-- Loading Indicator -->
+            <div id="estadisticasGastos" class="estadisticas-container mb-4"></div>
             <div id="cargandoGastos" class="text-center py-4" style="display: none;">
                 <div class="spinner-border text-primary" role="status">
                     <span class="sr-only">Cargando...</span>
                 </div>
                 <p class="mt-2">Cargando gastos...</p>
             </div>
-
-            <!-- Tabla de Gastos -->
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
-                            <th>ID</th>
-                            <th>Descripción</th>
-                            <th>Monto</th>
-                            <th>Categoría</th>
-                            <th>Producto</th>
-                            <th>Fecha</th>
-                            <th>Acciones</th>
+                            <th>ID</th><th>Descripción</th><th>Monto</th><th>Categoría</th>
+                            <th>Producto</th><th>Fecha</th><th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody id="tablaGastos">
-                        <!-- Los gastos se cargarán aquí dinámicamente -->
-                    </tbody>
+                    <tbody id="tablaGastos"></tbody>
                 </table>
             </div>
         </section>
-        <!-- Sección Compras-->
-        <section id="compras" class="card seccion-content">
+
+        <!-- Sección Compras (sin cambios) -->
+        <section id="compras" class="card seccion-content" style="display:none;">
             <div class="compras-header">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2><i class="fas fa-shopping-cart"></i> Gestión de Compras</h2>
@@ -347,13 +246,7 @@
                         </button>
                     </div>
                 </div>
-
-                <!-- Estadísticas Generales -->
-                <div id="estadisticasCompras" class="estadisticas-container mb-4">
-                    <!-- Las estadísticas se cargarán aquí dinámicamente -->
-                </div>
-
-                <!-- Filtros -->
+                <div id="estadisticasCompras" class="estadisticas-container mb-4"></div>
                 <div class="filtros-compras card mb-4">
                     <div class="card-body">
                         <h5 class="card-title"><i class="fas fa-filter"></i> Filtrar Compras</h5>
@@ -391,59 +284,847 @@
                                         <button type="button" class="btn btn-primary mr-2" id="btnBuscarFechasCompras">
                                             <i class="fas fa-search"></i> Buscar
                                         </button>
-                                        <button type="button" class="btn btn-outline-secondary"
-                                            id="btnLimpiarFiltrosCompras">
+                                        <button type="button" class="btn btn-outline-secondary" id="btnLimpiarFiltrosCompras">
                                             <i class="fas fa-eraser"></i> Limpiar
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Estadísticas del Período -->
-                        <div id="estadisticasPeriodoCompras" style="display: none;">
-                            <!-- Se mostrarán las estadísticas del período filtrado -->
-                        </div>
+                        <div id="estadisticasPeriodoCompras" style="display: none;"></div>
                     </div>
                 </div>
             </div>
-
-            <!-- Loading Indicator -->
             <div id="cargandoCompras" class="text-center py-4" style="display: none;">
                 <div class="spinner-border text-primary" role="status">
                     <span class="sr-only">Cargando...</span>
                 </div>
                 <p class="mt-2">Cargando compras...</p>
             </div>
-
-            <!-- Tabla de Compras -->
             <div class="table-responsive">
                 <table class="table table-hover compras-table">
                     <thead class="thead-dark">
                         <tr>
-                            <th>ID</th>
-                            <th>Proveedor</th>
-                            <th>Fecha</th>
-                            <th>Subtotal</th>
-                            <th>Retención</th>
-                            <th>Total</th>
-                            <th>Acciones</th>
+                            <th>ID</th><th>Proveedor</th><th>Fecha</th><th>Subtotal</th>
+                            <th>Retención</th><th>Total</th><th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody id="tablaCompras">
-                        <!-- Las compras se cargarán aquí dinámicamente -->
-                    </tbody>
+                    <tbody id="tablaCompras"></tbody>
                 </table>
             </div>
+            <div id="paginacionCompras" class="mt-4"></div>
+        </section>
 
-            <!-- Paginación -->
-            <div id="paginacionCompras" class="mt-4">
-                <!-- La paginación se generará dinámicamente -->
+        <!-- ============================================= -->
+        <!-- SECCIONES CRM - CORREGIDAS -->
+        <!-- ============================================= -->
+
+        <!-- Sección Usuarios -->
+        <section id="usuarios" class="card seccion-content" style="display:none;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2><i class="fas fa-users"></i> Gestión de Usuarios</h2>
+                <button class="btn-add" id="btnAgregarUsuario">
+                    <i class="fas fa-plus"></i> Agregar Usuario
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th><th>Cédula</th><th>Nombre</th><th>Correo</th><th>Teléfono</th>
+                            <th>Rol</th><th>Empresa</th><th>Fecha Creación</th><th>Estado</th><th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaUsuarios"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Sección Casos de Soporte -->
+        <section id="casos-soporte" class="card seccion-content" style="display:none;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2><i class="fas fa-headset"></i> Gestión de Casos de Soporte</h2>
+                <button class="btn-add" id="btnAgregarCasoSoporte">
+                    <i class="fas fa-plus"></i> Agregar Caso
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th><th>Cliente</th><th>Asunto</th><th>Descripción</th><th>Prioridad</th>
+                            <th>Estado</th><th>Fecha Creación</th><th>Fecha Resolución</th><th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaCasosSoporte"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Sección Actividades -->
+        <section id="actividades" class="card seccion-content" style="display:none;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2><i class="fas fa-tasks"></i> Gestión de Actividades</h2>
+                <button class="btn-add" id="btnAgregarActividad">
+                    <i class="fas fa-plus"></i> Agregar Actividad
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th><th>Tipo</th><th>Fecha Programada</th><th>Estado</th>
+                            <th>Usuario Asignado</th><th>Cliente</th><th>Notas</th><th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaActividades"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Sección Oportunidades -->
+        <section id="oportunidades" class="card seccion-content" style="display:none;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2><i class="fas fa-bullseye"></i> Gestión de Oportunidades</h2>
+                <button class="btn-add" id="btnAgregarOportunidad">
+                    <i class="fas fa-plus"></i> Agregar Oportunidad
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th><th>Cliente</th><th>Título</th><th>Valor Estimado</th>
+                            <th>Etapa</th><th>Probabilidad</th><th>Fecha Creación</th><th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaOportunidades"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Sección Interacciones -->
+        <section id="interacciones" class="card seccion-content" style="display:none;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2><i class="fas fa-comments"></i> Gestión de Interacciones</h2>
+                <button class="btn-add" id="btnAgregarInteraccion">
+                    <i class="fas fa-plus"></i> Agregar Interacción
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th><th>Cliente</th><th>Tipo</th><th>Fecha</th>
+                            <th>Descripción</th><th>Usuario</th><th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaInteracciones"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Sección Métricas CRM -->
+        <section id="metricas-crm" class="card seccion-content" style="display:none;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2><i class="fas fa-chart-bar"></i> Métricas del CRM</h2>
+                <button class="btn btn-primary" id="btnActualizarMetricas">
+                    <i class="fas fa-sync-alt"></i> Actualizar Métricas
+                </button>
+            </div>
+
+            <!-- Dashboard CRM -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h4><i class="fas fa-tachometer-alt"></i> Dashboard CRM</h4>
+                    <div class="row" id="dashboardCRM"></div>
+                </div>
+            </div>
+
+            <!-- Métricas Principales -->
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-exchange-alt"></i> Tasa de Conversión</h5>
+                        </div>
+                        <div class="card-body text-center" id="tasaConversion"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fas fa-smile"></i> Satisfacción del Cliente</h5>
+                        </div>
+                        <div class="card-body text-center" id="satisfaccionCliente"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0"><i class="fas fa-user-friends"></i> Retención de Clientes</h5>
+                        </div>
+                        <div class="card-body text-center" id="retencionClientes"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-warning text-white">
+                            <h5 class="mb-0"><i class="fas fa-chart-line"></i> Churn Rate</h5>
+                        </div>
+                        <div class="card-body text-center" id="churnRate"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Búsqueda Global CRM -->
+            <div class="card mt-4">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0"><i class="fas fa-search"></i> Búsqueda Global CRM</h5>
+                </div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="terminoBusquedaCRM"
+                            placeholder="Buscar en todo el CRM...">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" id="btnBuscarCRM">
+                                <i class="fas fa-search"></i> Buscar
+                            </button>
+                        </div>
+                    </div>
+                    <div id="resultadosBusquedaCRM" class="mt-3"></div>
+                </div>
             </div>
         </section>
     </div>
 
+    <!-- ============================================= -->
+    <!-- MODALES CRM - COMPLETAMENTE CORREGIDOS -->
+    <!-- ============================================= -->
+
+    
+<!-- CORRECCIÓN: Solo la sección de modales CRM del admin.html -->
+<!-- Reemplaza los modales CRM existentes con estos corregidos -->
+
+<!-- Modal Agregar/Editar Usuario -->
+<div class="modal fade" id="modalUsuario" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="modalUsuarioLabel">
+                    <i class="fas fa-user-plus"></i> Agregar Usuario
+                </h5>
+                <button type="button" class="close text-white" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formUsuario">
+                    <input type="hidden" id="idUsuario" name="idUsuario">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="cedula">Cédula *</label>
+                                <input type="text" class="form-control" id="cedula" name="cedula" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="nombre">Nombre *</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="correo">Correo *</label>
+                                <input type="email" class="form-control" id="correo" name="correo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono">Teléfono</label>
+                                <input type="text" class="form-control" id="telefono" name="telefono">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="password">Contraseña *</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                                <small class="form-text text-muted">Deje en blanco para mantener la contraseña actual al editar</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="rol">Rol *</label>
+                                <select class="form-control" id="rol" name="rol" required>
+                                    <option value="admin">Administrador</option>
+                                    <option value="empleado">Empleado</option>
+                                    <option value="cliente">Cliente</option>
+                                    <option value="empresa">Empresa</option>
+                                    <option value="crm">crm</option>
+                                </select>
+                            </div>
+                            <div class="form-group" id="grupoEmpresa" style="display:none;">
+                                <label for="empresa_trabaja">Empresa donde trabaja</label>
+                                <input type="text" class="form-control" id="empresa_trabaja" name="empresa_trabaja" placeholder="Nombre de la empresa">
+                                <small class="form-text text-muted">Requerido para empleados y empresas</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="direccion">Dirección</label>
+                        <textarea class="form-control" id="direccion" name="direccion" rows="2"></textarea>
+                    </div>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> Los campos marcados con (*) son obligatorios.
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnGuardarUsuario">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Agregar/Editar Interacción - CORREGIDO -->
+<div class="modal fade" id="modalInteraccion" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-secondary text-white">
+                <h5 class="modal-title" id="modalInteraccionLabel">
+                    <i class="fas fa-comments"></i> Agregar Interacción
+                </h5>
+                <button type="button" class="close text-white" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formInteraccion">
+                    <input type="hidden" id="id_interaccion" name="id_interaccion">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="id_clienteInteraccion">Cliente *</label>
+                                <select class="form-control" id="id_clienteInteraccion" name="id_cliente" >
+                                    <option value="">Seleccionar cliente...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="tipo_interaccion">Tipo de Interacción *</label>
+                                <select class="form-control" id="tipo_interaccion" name="tipo_interaccion" required>
+                                    <option value="Llamada">Llamada</option>
+                                    <option value="Email">Email</option>
+                                    <option value="Reunión">Reunión</option>
+                                    <option value="Chat">Chat</option>
+                                    <option value="Visita">Visita</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="fecha_interaccion">Fecha Interacción *</label>
+                                <input type="datetime-local" class="form-control" id="fecha_interaccion" name="fecha_interaccion" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="id_usuarioInteraccion">Usuario</label>
+                                <select class="form-control" id="id_usuarioInteraccion" name="id_usuario">
+                                    <option value="">Seleccionar usuario...</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcionInteraccion">Descripción</label>
+                        <textarea class="form-control" id="descripcionInteraccion" name="descripcion" rows="4"></textarea>
+                    </div>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> Los campos marcados con (*) son obligatorios.
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnGuardarInteraccion">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Agregar/Editar Caso de Soporte -->
+<div class="modal fade" id="modalCasoSoporte" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title" id="modalCasoSoporteLabel">
+                    <i class="fas fa-headset"></i> Agregar Caso de Soporte
+                </h5>
+                <button type="button" class="close text-white" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formCasoSoporte">
+                    <input type="hidden" id="id_caso" name="id_caso">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="id_cliente">Cliente *</label>
+                                <select class="form-control" id="id_cliente" name="id_cliente" required>
+                                    <option value="">Seleccionar cliente...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="asunto">Asunto *</label>
+                                <input type="text" class="form-control" id="asunto" name="asunto" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="prioridad">Prioridad</label>
+                                <select class="form-control" id="prioridad" name="prioridad">
+                                    <option value="Baja">Baja</option>
+                                    <option value="Media">Media</option>
+                                    <option value="Alta">Alta</option>
+                                    <option value="Crítica">Crítica</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="estado">Estado</label>
+                                <select class="form-control" id="estado" name="estado">
+                                    <option value="Abierto">Abierto</option>
+                                    <option value="En Progreso">En Progreso</option>
+                                    <option value="Resuelto">Resuelto</option>
+                                    <option value="Cerrado">Cerrado</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="fecha_resolucion">Fecha Resolución</label>
+                                <input type="datetime-local" class="form-control" id="fecha_resolucion" name="fecha_resolucion">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripción *</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" rows="4" required></textarea>
+                    </div>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> Los campos marcados con (*) son obligatorios.
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnGuardarCasoSoporte">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Agregar/Editar Actividad -->
+<div class="modal fade" id="modalActividad" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-white">
+                <h5 class="modal-title" id="modalActividadLabel">
+                    <i class="fas fa-tasks"></i> Agregar Actividad
+                </h5>
+                <button type="button" class="close text-white" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formActividad">
+                    <input type="hidden" id="id_actividad" name="id_actividad">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="tipo_actividad">Tipo de Actividad *</label>
+                                <select class="form-control" id="tipo_actividad" name="tipo_actividad" required>
+                                    <option value="Llamada">Llamada</option>
+                                    <option value="Reunión">Reunión</option>
+                                    <option value="Email">Email</option>
+                                    <option value="Tarea">Tarea</option>
+                                    <option value="Seguimiento">Seguimiento</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="fecha_programada">Fecha Programada *</label>
+                                <input type="datetime-local" class="form-control" id="fecha_programada" name="fecha_programada" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_usuario_asignado">Usuario Asignado *</label>
+                                <select class="form-control" id="id_usuario_asignado" name="id_usuario_asignado" required>
+                                    <option value="">Seleccionar usuario...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="estadoActividad">Estado</label>
+                                <select class="form-control" id="estadoActividad" name="estado">
+                                    <option value="Pendiente">Pendiente</option>
+                                    <option value="En Progreso">En Progreso</option>
+                                    <option value="Completada">Completada</option>
+                                    <option value="Cancelada">Cancelada</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_clienteActividad">Cliente</label>
+                                <select class="form-control" id="id_clienteActividad" name="id_cliente">
+                                    <option value="">Seleccionar cliente...</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="notas">Notas</label>
+                        <textarea class="form-control" id="notas" name="notas" rows="4"></textarea>
+                    </div>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> Los campos marcados con (*) son obligatorios.
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnGuardarActividad">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Agregar/Editar Oportunidad -->
+<div class="modal fade" id="modalOportunidad" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="modalOportunidadLabel">
+                    <i class="fas fa-bullseye"></i> Agregar Oportunidad
+                </h5>
+                <button type="button" class="close text-white" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formOportunidad">
+                    <input type="hidden" id="id_oportunidad" name="id_oportunidad">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="id_clienteOportunidad">Cliente *</label>
+                                <select class="form-control" id="id_clienteOportunidad" name="id_cliente" required>
+                                    <option value="">Seleccionar cliente...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="titulo">Título *</label>
+                                <input type="text" class="form-control" id="titulo" name="titulo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="valor_estimado">Valor Estimado</label>
+                                <input type="number" class="form-control" id="valor_estimado" name="valor_estimado" step="0.01" min="0">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="etapa">Etapa</label>
+                                <select class="form-control" id="etapa" name="etapa">
+                                    <option value="Prospección">Prospección</option>
+                                    <option value="Calificación">Calificación</option>
+                                    <option value="Propuesta">Propuesta</option>
+                                    <option value="Negociación">Negociación</option>
+                                    <option value="Cierre">Cierre</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="probabilidad">Probabilidad (%)</label>
+                                <input type="number" class="form-control" id="probabilidad" name="probabilidad" min="0" max="100" step="1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> Los campos marcados con (*) son obligatorios.
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnGuardarOportunidad">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <!-- MODALES ADICIONALES (mantener los existentes sin cambios) -->
+    <!-- Aquí van los modales de Productos, Proveedores, Gastos, Compras, etc. -->
     <!-- Modal para Detalle de Venta -->
+
+    <!-- Modal Agregar Producto -->
+    <div class="modal fade" id="modalAgregarProducto" tabindex="-1" role="dialog"
+        aria-labelledby="modalAgregarProductoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAgregarProductoLabel">
+                        <i class="fas fa-plus-circle"></i> Agregar Nuevo Producto
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formAgregarProducto">
+                        <div class="row">
+                            <!-- Columna Izquierda -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="nombreProducto">
+                                        <i class="fas fa-tag"></i> Nombre del Producto *
+                                    </label>
+                                    <input type="text" class="form-control" id="nombreProducto" name="nombreProducto"
+                                        placeholder="Ingrese el nombre del producto" required />
+                                    <small class="form-text text-muted">Nombre descriptivo del producto</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="valor">
+                                        <i class="fas fa-dollar-sign"></i> Precio *
+                                    </label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">$</span>
+                                        </div>
+                                        <input type="number" class="form-control" id="valor" name="valor"
+                                            placeholder="0.00" min="0" step="0.01" required />
+                                    </div>
+                                    <small class="form-text text-muted">Precio en pesos colombianos</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cantidad">
+                                        <i class="fas fa-boxes"></i> Cantidad en Stock *
+                                    </label>
+                                    <input type="number" class="form-control" id="cantidad" name="cantidad"
+                                        placeholder="0" min="0" required />
+                                    <small class="form-text text-muted">Cantidad disponible en inventario</small>
+                                </div>
+                            </div>
+
+                            <!-- Columna Derecha -->
+                            <div class="col-md-6">
+                                <!-- Selector de imagen mejorado -->
+                                <div class="form-group">
+                                    <label for="imagen">
+                                        <i class="fas fa-image"></i> Imagen del Producto *
+                                    </label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="imagen" name="imagen"
+                                            accept="image/*" required />
+                                        <label class="custom-file-label" for="imagen">Seleccionar imagen...</label>
+                                    </div>
+                                    <small class="form-text text-muted">Seleccione una imagen (JPG, PNG, GIF,
+                                        WEBP)</small>
+
+                                    <!-- Preview de la imagen -->
+                                    <div class="mt-3" id="imagenPreview" style="display: none">
+                                        <img id="previewImg" src="" alt="Preview" class="img-thumbnail"
+                                            style="max-height: 150px; max-width: 100%" />
+                                        <div class="mt-2">
+                                            <small class="text-muted">
+                                                <strong>Archivo seleccionado:</strong>
+                                                <span id="nombreArchivo"></span>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="informacion">
+                                        <i class="fas fa-info-circle"></i> Información del
+                                        Producto *
+                                    </label>
+                                    <textarea class="form-control" id="informacion" name="informacion" rows="6"
+                                        placeholder="Ingrese la información detallada del producto..."
+                                        required></textarea>
+                                    <small class="form-text text-muted">Descripción completa del producto,
+                                        características,
+                                        especificaciones, etc.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Información adicional -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle"></i>
+                                    <strong>Información:</strong> Los campos marcados con (*)
+                                    son obligatorios. La fecha de creación y porcentaje de
+                                    impuesto se asignarán automáticamente.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botones de acción -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                <i class="fas fa-times"></i> Cancelar
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="limpiarFormulario()">
+                                <i class="fas fa-eraser"></i> Limpiar
+                            </button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> Guardar Producto
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Actualizar Producto -->
+    <div class="modal fade" id="modalActualizarProducto" tabindex="-1" role="dialog"
+        aria-labelledby="modalActualizarProductoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalActualizarProductoLabel">
+                        <i class="fas fa-edit"></i> Actualizar Producto
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formActualizarProducto">
+                        <!-- Campo oculto para el ID del producto -->
+                        <input type="hidden" id="idProductoActualizar" name="idProducto">
+
+
+                        <div class="row">
+                            <!-- Columna Izquierda -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="nombreProductoActualizar">
+                                        <i class="fas fa-tag"></i> Nombre del Producto *
+                                    </label>
+                                    <input type="text" class="form-control" id="nombreProductoActualizar"
+                                        name="nombreProducto" placeholder="Ingrese el nombre del producto" required />
+                                    <small class="form-text text-muted">Nombre descriptivo del producto</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="valorActualizar">
+                                        <i class="fas fa-dollar-sign"></i> Precio *
+                                    </label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">$</span>
+                                        </div>
+                                        <input type="number" class="form-control" id="valorActualizar" name="valor"
+                                            placeholder="0.00" min="0" step="0.01" required />
+                                    </div>
+                                    <small class="form-text text-muted">Precio en pesos colombianos</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cantidadActualizar">
+                                        <i class="fas fa-boxes"></i> Cantidad en Stock *
+                                    </label>
+                                    <input type="number" class="form-control" id="cantidadActualizar" name="cantidad"
+                                        placeholder="0" min="0" required />
+                                    <small class="form-text text-muted">Cantidad disponible en inventario</small>
+                                </div>
+                            </div>
+
+                            <!-- Columna Derecha -->
+                            <div class="col-md-6">
+                                <!-- Imagen actual -->
+                                <div class="form-group">
+                                    <label>
+                                        <i class="fas fa-image"></i> Imagen Actual
+                                    </label>
+                                    <div class="current-image-container">
+                                        <img id="imagenActual" src="" alt="Imagen actual" class="current-image" />
+                                        <div class="mt-2">
+                                            <small class="text-muted">
+                                                <strong>Archivo actual:</strong>
+                                                <span id="nombreImagenActual"></span>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Nueva imagen (opcional) -->
+                                <div class="form-group">
+                                    <label for="imagenActualizar">
+                                        <i class="fas fa-upload"></i> Cambiar Imagen (Opcional)
+                                    </label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="imagenActualizar" name="imagen"
+                                            accept="image/*" />
+                                        <label class="custom-file-label" for="imagenActualizar">Seleccionar nueva
+                                            imagen...</label>
+                                    </div>
+                                    <small class="form-text text-muted">Deje vacío para mantener la imagen
+                                        actual</small>
+
+                                    <!-- Preview de la nueva imagen -->
+                                    <div class="mt-3" id="imagenPreviewActualizar" style="display: none">
+                                        <div class="alert alert-info">
+                                            <strong>Nueva imagen seleccionada:</strong>
+                                        </div>
+                                        <img id="previewImgActualizar" src="" alt="Preview" class="preview-image" />
+                                        <div class="mt-2">
+                                            <small class="text-success">
+                                                <strong>Nuevo archivo:</strong>
+                                                <span id="nombreArchivoActualizar"></span>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="informacionActualizar">
+                                        <i class="fas fa-info-circle"></i> Información del Producto *
+                                    </label>
+                                    <textarea class="form-control" id="informacionActualizar" name="informacion"
+                                        rows="6" placeholder="Ingrese la información detallada del producto..."
+                                        required></textarea>
+                                    <small class="form-text text-muted">Descripción completa del producto,
+                                        características, especificaciones, etc.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Información adicional -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-warning">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <strong>Importante:</strong>
+                                    Si no selecciona una nueva imagen, se mantendrá la imagen actual del producto.
+                                    Los campos marcados con (*) son obligatorios.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botones de acción -->
+                        <div class="form-actions">
+                            <div class="d-flex justify-content-end gap-2">
+                                <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">
+                                    <i class="fas fa-times"></i> Cancelar
+                                </button>
+                                <button type="button" class="btn btn-warning btn-lg"
+                                    onclick="limpiarFormularioActualizar()">
+                                    <i class="fas fa-undo"></i> Restablecer
+                                </button>
+                                <button type="submit" class="btn btn-success btn-lg">
+                                    <i class="fas fa-save"></i> Actualizar Producto
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="modalDetalleVenta" tabindex="-1" role="dialog" aria-labelledby="modalDetalleVentaLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -913,6 +1594,242 @@
             </div>
         </div>
     </div>
+    
+     
+    <!--Modal de proveedores-->
+    <!-- Modal Agregar Proveedor -->
+    <div class="modal fade" id="modalAgregarProveedor" tabindex="-1" role="dialog"
+        aria-labelledby="modalAgregarProveedorLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="modalAgregarProveedorLabel">
+                        <i class="fas fa-building"></i> Agregar Nuevo Proveedor
+                    </h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formAgregarProveedor">
+                        <div class="row">
+                            <!-- Columna Izquierda -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="nombre">
+                                        <i class="fas fa-building"></i> Nombre de la Empresa *
+                                    </label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre"
+                                        placeholder="Ingrese el nombre de la empresa" required maxlength="255" />
+                                    <small class="form-text text-muted">Nombre completo de la empresa proveedora</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nit">
+                                        <i class="fas fa-id-card"></i> NIT *
+                                    </label>
+                                    <input type="text" class="form-control" id="nit" name="nit"
+                                        placeholder="123456789-0" required maxlength="20" />
+                                    <small class="form-text text-muted">Número de Identificación Tributaria</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="telefono">
+                                        <i class="fas fa-phone"></i> Teléfono *
+                                    </label>
+                                    <input type="tel" class="form-control" id="telefono" name="telefono"
+                                        placeholder="+57 300 123 4567" required maxlength="20" />
+                                    <small class="form-text text-muted">Número de contacto principal</small>
+                                </div>
+                            </div>
+
+                            <!-- Columna Derecha -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="direccion">
+                                        <i class="fas fa-map-marker-alt"></i> Dirección *
+                                    </label>
+                                    <textarea class="form-control" id="direccion" name="direccion" rows="3"
+                                        placeholder="Ingrese la dirección completa..." required
+                                        maxlength="500"></textarea>
+                                    <small class="form-text text-muted">Dirección física de la empresa</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="correo">
+                                        <i class="fas fa-envelope"></i> Correo Electrónico *
+                                    </label>
+                                    <input type="email" class="form-control" id="correo" name="correo"
+                                        placeholder="contacto@empresa.com" required maxlength="255" />
+                                    <small class="form-text text-muted">Email de contacto principal</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="porcentaje_retefuente">
+                                        <i class="fas fa-percentage"></i> Porcentaje Retención en la Fuente
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="porcentaje_retefuente"
+                                            name="porcentaje_retefuente" placeholder="0.00" min="0" max="100"
+                                            step="0.01" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                    <small class="form-text text-muted">Porcentaje de retención aplicable
+                                        (opcional)</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Información adicional -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle"></i>
+                                    <strong>Información:</strong> Los campos marcados con (*) son obligatorios.
+                                    El porcentaje de retención en la fuente es opcional y debe estar entre 0 y 100.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botones de acción -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                <i class="fas fa-times"></i> Cancelar
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="limpiarFormularioAgregarProveedor()">
+                                <i class="fas fa-eraser"></i> Limpiar
+                            </button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> Guardar Proveedor
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Actualizar Proveedor -->
+    <div class="modal fade" id="modalActualizarProveedor" tabindex="-1" role="dialog"
+        aria-labelledby="modalActualizarProveedorLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-white">
+                    <h5 class="modal-title" id="modalActualizarProveedorLabel">
+                        <i class="fas fa-edit"></i> Actualizar Proveedor
+                    </h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formActualizarProveedor">
+                        <!-- Campo oculto para el ID del proveedor -->
+                        <input type="hidden" id="idProveedorActualizar" name="idProveedor">
+
+                        <div class="row">
+                            <!-- Columna Izquierda -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="nombreProveedorActualizar">
+                                        <i class="fas fa-building"></i> Nombre de la Empresa *
+                                    </label>
+                                    <input type="text" class="form-control" id="nombreProveedorActualizar" name="nombre"
+                                        placeholder="Ingrese el nombre de la empresa" required maxlength="255" />
+                                    <small class="form-text text-muted">Nombre completo de la empresa proveedora</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nitActualizar">
+                                        <i class="fas fa-id-card"></i> NIT *
+                                    </label>
+                                    <input type="text" class="form-control" id="nitActualizar" name="nit"
+                                        placeholder="123456789-0" required maxlength="20" />
+                                    <small class="form-text text-muted">Número de Identificación Tributaria</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="telefonoActualizar">
+                                        <i class="fas fa-phone"></i> Teléfono *
+                                    </label>
+                                    <input type="tel" class="form-control" id="telefonoActualizar" name="telefono"
+                                        placeholder="+57 300 123 4567" required maxlength="20" />
+                                    <small class="form-text text-muted">Número de contacto principal</small>
+                                </div>
+                            </div>
+
+                            <!-- Columna Derecha -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="direccionActualizar">
+                                        <i class="fas fa-map-marker-alt"></i> Dirección *
+                                    </label>
+                                    <textarea class="form-control" id="direccionActualizar" name="direccion" rows="3"
+                                        placeholder="Ingrese la dirección completa..." required
+                                        maxlength="500"></textarea>
+                                    <small class="form-text text-muted">Dirección física de la empresa</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="correoActualizar">
+                                        <i class="fas fa-envelope"></i> Correo Electrónico *
+                                    </label>
+                                    <input type="email" class="form-control" id="correoActualizar" name="correo"
+                                        placeholder="contacto@empresa.com" required maxlength="255" />
+                                    <small class="form-text text-muted">Email de contacto principal</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="porcentajeRetefuenteActualizar">
+                                        <i class="fas fa-percentage"></i> Porcentaje Retención en la Fuente
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="porcentajeRetefuenteActualizar"
+                                            name="porcentaje_retefuente" placeholder="0.00" min="0" max="100"
+                                            step="0.01" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                    <small class="form-text text-muted">Porcentaje de retención aplicable
+                                        (opcional)</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Información adicional -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-warning">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <strong>Importante:</strong> Los campos marcados con (*) son obligatorios.
+                                    Asegúrese de verificar que los datos sean correctos antes de guardar los cambios.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botones de acción -->
+                        <div class="form-actions">
+                            <div class="d-flex justify-content-end gap-2">
+                                <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">
+                                    <i class="fas fa-times"></i> Cancelar
+                                </button>
+                                <button type="button" class="btn btn-warning btn-lg"
+                                    onclick="limpiarFormularioActualizarProveedor()">
+                                    <i class="fas fa-undo"></i> Restablecer
+                                </button>
+                                <button type="submit" class="btn btn-success btn-lg">
+                                    <i class="fas fa-save"></i> Actualizar Proveedor
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Estilos CSS para Compras -->
     <style>
@@ -1242,10 +2159,9 @@
             transition: all 0.3s ease;
         }
     </style>
+ 
 
-
-
-
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
@@ -1256,7 +2172,7 @@
     <script type="module" src="js/proveedor.js"></script>
     <script type="module" src="js/gastos.js"></script>
     <script type="module" src="js/compras.js"></script>
-
+    <script type="module" src="js/crm.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -1265,9 +2181,7 @@
             const role = sessionStorage.getItem("rol");
 
             if (!idUsuario || role !== "admin") {
-                alert(
-                    "Debes iniciar sesión como administrador para acceder a esta página."
-                );
+                alert("Debes iniciar sesión como administrador para acceder a esta página.");
                 window.location.href = "login.html";
             }
 
@@ -1277,6 +2191,19 @@
                 if (confirm("¿Estás seguro de que quieres cerrar sesión?")) {
                     sessionStorage.clear();
                     window.location.href = "login.html";
+                }
+            });
+
+            // Mostrar/ocultar campo empresa según el rol seleccionado
+            $('#rol').on('change', function() {
+                const rol = $(this).val();
+                if (rol === 'empresa' || rol === 'empleado') {
+                    $('#grupoEmpresa').slideDown();
+                    $('#empresa_trabaja').prop('required', true);
+                } else {
+                    $('#grupoEmpresa').slideUp();
+                    $('#empresa_trabaja').prop('required', false);
+                    $('#empresa_trabaja').val('');
                 }
             });
 
@@ -1297,987 +2224,58 @@
 
                 // Guardar última sección en localStorage
                 localStorage.setItem('ultimaSeccion', target);
+
+                // Cargar datos específicos según la sección
+                if (target === '#usuarios') {
+                    cargarUsuarios();
+                } else if (target === '#casos-soporte') {
+                    cargarCasosSoporte();
+                } else if (target === '#actividades') {
+                    cargarActividades();
+                } else if (target === '#oportunidades') {
+                    cargarOportunidades();
+                } else if (target === '#interacciones') {
+                    cargarInteracciones();
+                } else if (target === '#metricas-crm') {
+                    cargarMetricasCRM();
+                }else if (target === '#gastos') {
+                        cargarGastos(); // Esto debería ejecutarse siempre al hacer clic en Gastos
+                }
             });
 
-            // ===== Restaurar sección activa al recargar =====
+            // Restaurar sección activa al recargar
             const ultimaSeccion = localStorage.getItem('ultimaSeccion');
             if (ultimaSeccion && $(ultimaSeccion).length > 0) {
-                // Mostrar esa sección
                 $('.seccion-content').hide();
                 $(ultimaSeccion).show();
-
-                // Activar el link de la barra lateral
                 $('.sidebar a').removeClass('active');
                 $(`.sidebar a[href="${ultimaSeccion}"]`).addClass('active');
+
+                // Cargar datos de la sección
+                if (ultimaSeccion === '#usuarios') {
+                    cargarUsuarios();
+                } else if (ultimaSeccion === '#casos-soporte') {
+                    cargarCasosSoporte();
+                } else if (ultimaSeccion === '#actividades') {
+                    cargarActividades();
+                } else if (ultimaSeccion === '#oportunidades') {
+                    cargarOportunidades();
+                } else if (ultimaSeccion === '#interacciones') {
+                    cargarInteracciones();
+                } else if (ultimaSeccion === '#metricas-crm') {
+                    cargarMetricasCRM();
+                }
             } else {
-                // Si no hay sección guardada, mostrar productos por defecto
+                // Mostrar productos por defecto
                 $('#productos').show();
                 $('.sidebar a[href="#productos"]').addClass('active');
             }
-
-
-
         });
     </script>
-
-    <!-- Modal Agregar Producto -->
-    <div class="modal fade" id="modalAgregarProducto" tabindex="-1" role="dialog"
-        aria-labelledby="modalAgregarProductoLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalAgregarProductoLabel">
-                        <i class="fas fa-plus-circle"></i> Agregar Nuevo Producto
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="formAgregarProducto">
-                        <div class="row">
-                            <!-- Columna Izquierda -->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="nombreProducto">
-                                        <i class="fas fa-tag"></i> Nombre del Producto *
-                                    </label>
-                                    <input type="text" class="form-control" id="nombreProducto" name="nombreProducto"
-                                        placeholder="Ingrese el nombre del producto" required />
-                                    <small class="form-text text-muted">Nombre descriptivo del producto</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="valor">
-                                        <i class="fas fa-dollar-sign"></i> Precio *
-                                    </label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">$</span>
-                                        </div>
-                                        <input type="number" class="form-control" id="valor" name="valor"
-                                            placeholder="0.00" min="0" step="0.01" required />
-                                    </div>
-                                    <small class="form-text text-muted">Precio en pesos colombianos</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="cantidad">
-                                        <i class="fas fa-boxes"></i> Cantidad en Stock *
-                                    </label>
-                                    <input type="number" class="form-control" id="cantidad" name="cantidad"
-                                        placeholder="0" min="0" required />
-                                    <small class="form-text text-muted">Cantidad disponible en inventario</small>
-                                </div>
-                            </div>
-
-                            <!-- Columna Derecha -->
-                            <div class="col-md-6">
-                                <!-- Selector de imagen mejorado -->
-                                <div class="form-group">
-                                    <label for="imagen">
-                                        <i class="fas fa-image"></i> Imagen del Producto *
-                                    </label>
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="imagen" name="imagen"
-                                            accept="image/*" required />
-                                        <label class="custom-file-label" for="imagen">Seleccionar imagen...</label>
-                                    </div>
-                                    <small class="form-text text-muted">Seleccione una imagen (JPG, PNG, GIF,
-                                        WEBP)</small>
-
-                                    <!-- Preview de la imagen -->
-                                    <div class="mt-3" id="imagenPreview" style="display: none">
-                                        <img id="previewImg" src="" alt="Preview" class="img-thumbnail"
-                                            style="max-height: 150px; max-width: 100%" />
-                                        <div class="mt-2">
-                                            <small class="text-muted">
-                                                <strong>Archivo seleccionado:</strong>
-                                                <span id="nombreArchivo"></span>
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="informacion">
-                                        <i class="fas fa-info-circle"></i> Información del
-                                        Producto *
-                                    </label>
-                                    <textarea class="form-control" id="informacion" name="informacion" rows="6"
-                                        placeholder="Ingrese la información detallada del producto..."
-                                        required></textarea>
-                                    <small class="form-text text-muted">Descripción completa del producto,
-                                        características,
-                                        especificaciones, etc.</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Información adicional -->
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="alert alert-info">
-                                    <i class="fas fa-info-circle"></i>
-                                    <strong>Información:</strong> Los campos marcados con (*)
-                                    son obligatorios. La fecha de creación y porcentaje de
-                                    impuesto se asignarán automáticamente.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Botones de acción -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                <i class="fas fa-times"></i> Cancelar
-                            </button>
-                            <button type="button" class="btn btn-primary" onclick="limpiarFormulario()">
-                                <i class="fas fa-eraser"></i> Limpiar
-                            </button>
-                            <button type="submit" class="btn btn-success">
-                                <i class="fas fa-save"></i> Guardar Producto
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Actualizar Producto -->
-    <div class="modal fade" id="modalActualizarProducto" tabindex="-1" role="dialog"
-        aria-labelledby="modalActualizarProductoLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalActualizarProductoLabel">
-                        <i class="fas fa-edit"></i> Actualizar Producto
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="formActualizarProducto">
-                        <!-- Campo oculto para el ID del producto -->
-                        <input type="hidden" id="idProductoActualizar" name="idProducto">
-                        
-
-                        <div class="row">
-                            <!-- Columna Izquierda -->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="nombreProductoActualizar">
-                                        <i class="fas fa-tag"></i> Nombre del Producto *
-                                    </label>
-                                    <input type="text" class="form-control" id="nombreProductoActualizar"
-                                        name="nombreProducto" placeholder="Ingrese el nombre del producto" required />
-                                    <small class="form-text text-muted">Nombre descriptivo del producto</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="valorActualizar">
-                                        <i class="fas fa-dollar-sign"></i> Precio *
-                                    </label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">$</span>
-                                        </div>
-                                        <input type="number" class="form-control" id="valorActualizar" name="valor"
-                                            placeholder="0.00" min="0" step="0.01" required />
-                                    </div>
-                                    <small class="form-text text-muted">Precio en pesos colombianos</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="cantidadActualizar">
-                                        <i class="fas fa-boxes"></i> Cantidad en Stock *
-                                    </label>
-                                    <input type="number" class="form-control" id="cantidadActualizar" name="cantidad"
-                                        placeholder="0" min="0" required />
-                                    <small class="form-text text-muted">Cantidad disponible en inventario</small>
-                                </div>
-                            </div>
-
-                            <!-- Columna Derecha -->
-                            <div class="col-md-6">
-                                <!-- Imagen actual -->
-                                <div class="form-group">
-                                    <label>
-                                        <i class="fas fa-image"></i> Imagen Actual
-                                    </label>
-                                    <div class="current-image-container">
-                                        <img id="imagenActual" src="" alt="Imagen actual" class="current-image" />
-                                        <div class="mt-2">
-                                            <small class="text-muted">
-                                                <strong>Archivo actual:</strong>
-                                                <span id="nombreImagenActual"></span>
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Nueva imagen (opcional) -->
-                                <div class="form-group">
-                                    <label for="imagenActualizar">
-                                        <i class="fas fa-upload"></i> Cambiar Imagen (Opcional)
-                                    </label>
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="imagenActualizar" name="imagen"
-                                            accept="image/*" />
-                                        <label class="custom-file-label" for="imagenActualizar">Seleccionar nueva
-                                            imagen...</label>
-                                    </div>
-                                    <small class="form-text text-muted">Deje vacío para mantener la imagen
-                                        actual</small>
-
-                                    <!-- Preview de la nueva imagen -->
-                                    <div class="mt-3" id="imagenPreviewActualizar" style="display: none">
-                                        <div class="alert alert-info">
-                                            <strong>Nueva imagen seleccionada:</strong>
-                                        </div>
-                                        <img id="previewImgActualizar" src="" alt="Preview" class="preview-image" />
-                                        <div class="mt-2">
-                                            <small class="text-success">
-                                                <strong>Nuevo archivo:</strong>
-                                                <span id="nombreArchivoActualizar"></span>
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="informacionActualizar">
-                                        <i class="fas fa-info-circle"></i> Información del Producto *
-                                    </label>
-                                    <textarea class="form-control" id="informacionActualizar" name="informacion"
-                                        rows="6" placeholder="Ingrese la información detallada del producto..."
-                                        required></textarea>
-                                    <small class="form-text text-muted">Descripción completa del producto,
-                                        características, especificaciones, etc.</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Información adicional -->
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="alert alert-warning">
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                    <strong>Importante:</strong>
-                                    Si no selecciona una nueva imagen, se mantendrá la imagen actual del producto.
-                                    Los campos marcados con (*) son obligatorios.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Botones de acción -->
-                        <div class="form-actions">
-                            <div class="d-flex justify-content-end gap-2">
-                                <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">
-                                    <i class="fas fa-times"></i> Cancelar
-                                </button>
-                                <button type="button" class="btn btn-warning btn-lg"
-                                    onclick="limpiarFormularioActualizar()">
-                                    <i class="fas fa-undo"></i> Restablecer
-                                </button>
-                                <button type="submit" class="btn btn-success btn-lg">
-                                    <i class="fas fa-save"></i> Actualizar Producto
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Modal de proveedores-->
-    <!-- Modal Agregar Proveedor -->
-    <div class="modal fade" id="modalAgregarProveedor" tabindex="-1" role="dialog"
-        aria-labelledby="modalAgregarProveedorLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="modalAgregarProveedorLabel">
-                        <i class="fas fa-building"></i> Agregar Nuevo Proveedor
-                    </h5>
-                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="formAgregarProveedor">
-                        <div class="row">
-                            <!-- Columna Izquierda -->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="nombre">
-                                        <i class="fas fa-building"></i> Nombre de la Empresa *
-                                    </label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre"
-                                        placeholder="Ingrese el nombre de la empresa" required maxlength="255" />
-                                    <small class="form-text text-muted">Nombre completo de la empresa proveedora</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="nit">
-                                        <i class="fas fa-id-card"></i> NIT *
-                                    </label>
-                                    <input type="text" class="form-control" id="nit" name="nit"
-                                        placeholder="123456789-0" required maxlength="20" />
-                                    <small class="form-text text-muted">Número de Identificación Tributaria</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="telefono">
-                                        <i class="fas fa-phone"></i> Teléfono *
-                                    </label>
-                                    <input type="tel" class="form-control" id="telefono" name="telefono"
-                                        placeholder="+57 300 123 4567" required maxlength="20" />
-                                    <small class="form-text text-muted">Número de contacto principal</small>
-                                </div>
-                            </div>
-
-                            <!-- Columna Derecha -->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="direccion">
-                                        <i class="fas fa-map-marker-alt"></i> Dirección *
-                                    </label>
-                                    <textarea class="form-control" id="direccion" name="direccion" rows="3"
-                                        placeholder="Ingrese la dirección completa..." required
-                                        maxlength="500"></textarea>
-                                    <small class="form-text text-muted">Dirección física de la empresa</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="correo">
-                                        <i class="fas fa-envelope"></i> Correo Electrónico *
-                                    </label>
-                                    <input type="email" class="form-control" id="correo" name="correo"
-                                        placeholder="contacto@empresa.com" required maxlength="255" />
-                                    <small class="form-text text-muted">Email de contacto principal</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="porcentaje_retefuente">
-                                        <i class="fas fa-percentage"></i> Porcentaje Retención en la Fuente
-                                    </label>
-                                    <div class="input-group">
-                                        <input type="number" class="form-control" id="porcentaje_retefuente"
-                                            name="porcentaje_retefuente" placeholder="0.00" min="0" max="100"
-                                            step="0.01" />
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">%</span>
-                                        </div>
-                                    </div>
-                                    <small class="form-text text-muted">Porcentaje de retención aplicable
-                                        (opcional)</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Información adicional -->
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="alert alert-info">
-                                    <i class="fas fa-info-circle"></i>
-                                    <strong>Información:</strong> Los campos marcados con (*) son obligatorios.
-                                    El porcentaje de retención en la fuente es opcional y debe estar entre 0 y 100.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Botones de acción -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                <i class="fas fa-times"></i> Cancelar
-                            </button>
-                            <button type="button" class="btn btn-primary" onclick="limpiarFormularioAgregarProveedor()">
-                                <i class="fas fa-eraser"></i> Limpiar
-                            </button>
-                            <button type="submit" class="btn btn-success">
-                                <i class="fas fa-save"></i> Guardar Proveedor
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Actualizar Proveedor -->
-    <div class="modal fade" id="modalActualizarProveedor" tabindex="-1" role="dialog"
-        aria-labelledby="modalActualizarProveedorLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-warning text-white">
-                    <h5 class="modal-title" id="modalActualizarProveedorLabel">
-                        <i class="fas fa-edit"></i> Actualizar Proveedor
-                    </h5>
-                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="formActualizarProveedor">
-                        <!-- Campo oculto para el ID del proveedor -->
-                        <input type="hidden" id="idProveedorActualizar" name="idProveedor">
-
-                        <div class="row">
-                            <!-- Columna Izquierda -->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="nombreProveedorActualizar">
-                                        <i class="fas fa-building"></i> Nombre de la Empresa *
-                                    </label>
-                                    <input type="text" class="form-control" id="nombreProveedorActualizar" name="nombre"
-                                        placeholder="Ingrese el nombre de la empresa" required maxlength="255" />
-                                    <small class="form-text text-muted">Nombre completo de la empresa proveedora</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="nitActualizar">
-                                        <i class="fas fa-id-card"></i> NIT *
-                                    </label>
-                                    <input type="text" class="form-control" id="nitActualizar" name="nit"
-                                        placeholder="123456789-0" required maxlength="20" />
-                                    <small class="form-text text-muted">Número de Identificación Tributaria</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="telefonoActualizar">
-                                        <i class="fas fa-phone"></i> Teléfono *
-                                    </label>
-                                    <input type="tel" class="form-control" id="telefonoActualizar" name="telefono"
-                                        placeholder="+57 300 123 4567" required maxlength="20" />
-                                    <small class="form-text text-muted">Número de contacto principal</small>
-                                </div>
-                            </div>
-
-                            <!-- Columna Derecha -->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="direccionActualizar">
-                                        <i class="fas fa-map-marker-alt"></i> Dirección *
-                                    </label>
-                                    <textarea class="form-control" id="direccionActualizar" name="direccion" rows="3"
-                                        placeholder="Ingrese la dirección completa..." required
-                                        maxlength="500"></textarea>
-                                    <small class="form-text text-muted">Dirección física de la empresa</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="correoActualizar">
-                                        <i class="fas fa-envelope"></i> Correo Electrónico *
-                                    </label>
-                                    <input type="email" class="form-control" id="correoActualizar" name="correo"
-                                        placeholder="contacto@empresa.com" required maxlength="255" />
-                                    <small class="form-text text-muted">Email de contacto principal</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="porcentajeRetefuenteActualizar">
-                                        <i class="fas fa-percentage"></i> Porcentaje Retención en la Fuente
-                                    </label>
-                                    <div class="input-group">
-                                        <input type="number" class="form-control" id="porcentajeRetefuenteActualizar"
-                                            name="porcentaje_retefuente" placeholder="0.00" min="0" max="100"
-                                            step="0.01" />
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">%</span>
-                                        </div>
-                                    </div>
-                                    <small class="form-text text-muted">Porcentaje de retención aplicable
-                                        (opcional)</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Información adicional -->
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="alert alert-warning">
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                    <strong>Importante:</strong> Los campos marcados con (*) son obligatorios.
-                                    Asegúrese de verificar que los datos sean correctos antes de guardar los cambios.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Botones de acción -->
-                        <div class="form-actions">
-                            <div class="d-flex justify-content-end gap-2">
-                                <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">
-                                    <i class="fas fa-times"></i> Cancelar
-                                </button>
-                                <button type="button" class="btn btn-warning btn-lg"
-                                    onclick="limpiarFormularioActualizarProveedor()">
-                                    <i class="fas fa-undo"></i> Restablecer
-                                </button>
-                                <button type="submit" class="btn btn-success btn-lg">
-                                    <i class="fas fa-save"></i> Actualizar Proveedor
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- JavaScript para validación en tiempo real -->
-    <script>
-        $(document).ready(function () {
-            // Validación en tiempo real para campos de proveedor
-            $('#nombre, #nombreProveedorActualizar').on('input', function () {
-                validateField($(this), $(this).val().trim().length >= 2, 'El nombre debe tener al menos 2 caracteres');
-            });
-
-            $('#nit, #nitActualizar').on('input', function () {
-                const nitPattern = /^[0-9]{8,15}(-[0-9])?$/;
-                validateField($(this), nitPattern.test($(this).val().trim()), 'Formato de NIT inválido (ej: 123456789-0)');
-            });
-
-            $('#telefono, #telefonoActualizar').on('input', function () {
-                const phonePattern = /^[\+]?[0-9\s\-\(\)]{7,20}$/;
-                validateField($(this), phonePattern.test($(this).val().trim()), 'Formato de teléfono inválido');
-            });
-
-            $('#correo, #correoActualizar').on('input', function () {
-                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                validateField($(this), emailPattern.test($(this).val().trim()), 'Formato de email inválido');
-            });
-
-            $('#direccion, #direccionActualizar').on('input', function () {
-                validateField($(this), $(this).val().trim().length >= 10, 'La dirección debe tener al menos 10 caracteres');
-            });
-
-            $('#porcentaje_retefuente, #porcentajeRetefuenteActualizar').on('input', function () {
-                const value = parseFloat($(this).val());
-                validateField($(this), isNaN(value) || (value >= 0 && value <= 100), 'El porcentaje debe estar entre 0 y 100');
-            });
-
-            function validateField($field, isValid, errorMessage) {
-                if (isValid) {
-                    $field.removeClass('is-invalid').addClass('is-valid');
-                    $field.next('.invalid-feedback').remove();
-                } else {
-                    $field.removeClass('is-valid').addClass('is-invalid');
-                    if (!$field.next('.invalid-feedback').length) {
-                        $field.after(`<div class="invalid-feedback">${errorMessage}</div>`);
-                    }
-                }
-            }
-
-            // Formatear NIT mientras se escribe
-            $('#nit, #nitActualizar').on('input', function () {
-                let value = $(this).val().replace(/[^0-9-]/g, '');
-                if (value.length > 9 && !value.includes('-')) {
-                    value = value.slice(0, -1) + '-' + value.slice(-1);
-                }
-                $(this).val(value);
-            });
-
-            // Formatear teléfono mientras se escribe
-            $('#telefono, #telefonoActualizar').on('input', function () {
-                let value = $(this).val().replace(/[^0-9\+\s\-\(\)]/g, '');
-                $(this).val(value);
-            });
-
-            // Limitar caracteres en campos
-            $('#nombre, #nombreProveedorActualizar').attr('maxlength', 255);
-            $('#nit, #nitActualizar').attr('maxlength', 20);
-            $('#telefono, #telefonoActualizar').attr('maxlength', 20);
-            $('#correo, #correoActualizar').attr('maxlength', 255);
-            $('#direccion, #direccionActualizar').attr('maxlength', 500);
-
-            // Actualizar estadísticas cuando se carguen los proveedores
-            $(document).on('proveedoresCargados', function (event, proveedores) {
-                actualizarEstadisticasProveedores(proveedores);
-            });
-
-            function actualizarEstadisticasProveedores(proveedores) {
-                const total = proveedores.length;
-                $('#totalProveedores').text(total);
-                $('#proveedoresActivos').text(total); // Asumiendo que todos están activos
-
-                // Calcular promedio de retención
-                const promedioRetencion = total > 0 ?
-                    (proveedores.reduce((sum, p) => sum + parseFloat(p.porcentaje_retefuente || 0), 0) / total).toFixed(2) :
-                    0;
-                $('#promedioRetencion').text(promedioRetencion + '%');
-
-                // Último proveedor registrado (asumiendo que tienen IDs incrementales)
-                const ultimoProveedor = total > 0 ?
-                    proveedores.reduce((max, p) => p.idProveedor > max.idProveedor ? p : max, proveedores[0]) :
-                    null;
-                $('#ultimoProveedor').text(ultimoProveedor ? ultimoProveedor.nombre.substring(0, 15) + '...' : 'N/A');
-            }
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-            // ... código existente ...
-
-            // Manejar navegación entre secciones
-            $('.sidebar a[href^="#"]').click(function (e) {
-                e.preventDefault();
-                const target = $(this).attr('href');
-
-                // Ocultar todas las secciones
-                $('.seccion-content').hide();
-
-                // Mostrar la sección seleccionada
-                $(target).show();
-
-                // Si la sección es gastos, cargar los gastos
-                if (target === '#gastos') {
-                    cargarGastos();
-                }
-
-                // Actualizar clase activa en sidebar
-                $('.sidebar a').removeClass('active');
-                $(this).addClass('active');
-            });
-
-            // ... resto del código ...
-        });
-    </script>
-
-    <!-- JavaScript para el modal -->
-    <script>
-        $(document).ready(function () {
-            // Activar el modal al hacer clic en "Agregar Producto"
-            $("#btnAgregarProducto").click(function () {
-                $("#modalAgregarProducto").modal("show");
-            });
-
-            // Manejar navegación entre secciones
-            $('.sidebar a[href^="#"]').click(function (e) {
-                e.preventDefault();
-                const target = $(this).attr('href');
-
-                // Ocultar todas las secciones
-                $('.seccion-content').hide();
-
-                // Mostrar la sección seleccionada
-                $(target).show();
-
-                // Actualizar clase activa en sidebar
-                $('.sidebar a').removeClass('active');
-                $(this).addClass('active');
-
-                // Cargar datos específicos según la sección
-                if (target === '#proveedores') {
-                    // Cargar proveedores cuando se muestre la sección
-                    setTimeout(() => {
-                        if (window.cargarProveedores) {
-                            window.cargarProveedores();
-                        }
-                    }, 100);
-                }
-                else if (target === '#compras') {
-                    // Cargar compras cuando se muestre la sección
-                    setTimeout(() => {
-                        if (window.cargarCompras) {
-                            window.cargarCompras();
-                        }
-                    }, 100);
-                }
-                else if (target === '#gastos') {
-                    cargarGastos();
-                }
-            });
-
-            // Manejar la selección de archivo
-            $("#imagen").on("change", function () {
-                const file = this.files[0];
-                const label = $(this).next(".custom-file-label");
-                const preview = $("#imagenPreview");
-                const previewImg = $("#previewImg");
-                const nombreArchivo = $("#nombreArchivo");
-
-                if (file) {
-                    // Actualizar el label con el nombre del archivo
-                    label.text(file.name);
-
-                    // Mostrar información del archivo
-                    nombreArchivo.text(file.name);
-
-                    // Validar tipo de archivo
-                    const validTypes = [
-                        "image/jpeg",
-                        "image/jpg",
-                        "image/png",
-                        "image/gif",
-                        "image/webp",
-                    ];
-                    if (validTypes.includes(file.type)) {
-                        $(this).removeClass("is-invalid").addClass("is-valid");
-
-                        // Crear preview de la imagen
-                        const reader = new FileReader();
-                        reader.onload = function (e) {
-                            previewImg.attr("src", e.target.result);
-                            preview.show();
-                        };
-                        reader.readAsDataURL(file);
-                    } else {
-                        $(this).addClass("is-invalid").removeClass("is-valid");
-                        preview.hide();
-                        alert(
-                            "Por favor seleccione un archivo de imagen válido (JPG, PNG, GIF, WEBP)"
-                        );
-                        $(this).val("");
-                        label.text("Seleccionar imagen...");
-                    }
-                } else {
-                    label.text("Seleccionar imagen...");
-                    preview.hide();
-                }
-            });
-        });
-
-        // Limpiar formulario
-        function limpiarFormulario() {
-            $("#formAgregarProducto")[0].reset();
-            // Remover clases de validación
-            $(".form-control, .custom-file-input").removeClass(
-                "is-valid is-invalid"
-            );
-            // Limpiar preview de imagen
-            $("#imagenPreview").hide();
-            $("#previewImg").attr("src", "");
-            $(".custom-file-label").text("Seleccionar imagen...");
-        }
-
-        // Validación en tiempo real para otros campos
-        $("#nombreProducto, #valor, #cantidad, #informacion").on(
-            "input",
-            function () {
-                if ($(this).val().trim() === "") {
-                    $(this).addClass("is-invalid").removeClass("is-valid");
-                } else {
-                    $(this).removeClass("is-invalid").addClass("is-valid");
-                }
-            }
-        );
-
-        // Formatear precio mientras se escribe
-        $("#valor").on("input", function () {
-            let value = $(this).val();
-            if (value < 0) {
-                $(this).val(0);
-            }
-        });
-    </script>
-
-    <!-- Estilos CSS para Ventas -->
-    <style>
-        /* Estilos para la sección de ventas */
-        .ventas-header {
-            margin-bottom: 2rem;
-        }
-
-        .estadisticas-container {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
-            padding: 2rem;
-            color: white;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .stat-card.bg-primary {
-            background: linear-gradient(135deg, #4e73df, #2e59d9);
-        }
-
-        .stat-card.bg-success {
-            background: linear-gradient(135deg, #1cc88a, #17a673);
-        }
-
-        .stat-card.bg-info {
-            background: linear-gradient(135deg, #36b9cc, #2c9faf);
-        }
-
-        .stat-card.bg-warning {
-            background: linear-gradient(135deg, #f6c23e, #dda20a);
-        }
-
-        .stat-card .stat-icon {
-            font-size: 2.5rem;
-            opacity: 0.8;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-card .stat-info h4 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-card .stat-info p {
-            margin: 0;
-            opacity: 0.9;
-            font-size: 0.9rem;
-        }
-
-        .stat-card-small {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 1rem;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .filtros-ventas {
-            border-left: 4px solid #667eea;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .filtros-ventas .card-title {
-            color: #667eea;
-            font-weight: 600;
-        }
-
-        .ventas-table {
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .ventas-table thead {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-        }
-
-        .ventas-table .venta-row {
-            transition: all 0.2s ease;
-        }
-
-        .ventas-table .venta-row:hover {
-            background-color: #f8f9fc;
-            transform: translateX(5px);
-        }
-
-        .customer-info strong {
-            color: #5a5c69;
-        }
-
-        .productos-preview {
-            max-width: 200px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-size: 0.9rem;
-            color: #6c757d;
-        }
-
-        .monto-total {
-            color: #1cc88a;
-            font-size: 1.1rem;
-        }
-
-        .monto-subtotal {
-            color: #36b9cc;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 0.25rem;
-        }
-
-        .action-buttons .btn {
-            transition: all 0.2s ease;
-        }
-
-        .action-buttons .btn:hover {
-            transform: scale(1.1);
-        }
-
-        .no-data {
-            padding: 3rem;
-        }
-
-        .badge-success {
-            background-color: #1cc88a !important;
-        }
-
-        .badge-warning {
-            background-color: #f6c23e !important;
-        }
-
-        .badge-danger {
-            background-color: #e74a3b !important;
-        }
-
-        .ventas-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        /* Responsivo */
-        @media (max-width: 768px) {
-            .estadisticas-container {
-                padding: 1rem;
-            }
-
-            .stat-card {
-                margin-bottom: 0.5rem;
-            }
-
-            .stat-card .stat-info h4 {
-                font-size: 1.5rem;
-            }
-
-            .ventas-actions {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .productos-preview {
-                max-width: 150px;
-            }
-        }
-
-        /* Sidebar styles improvement */
-        .sidebar a.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border-radius: 8px;
-        }
-
-        .seccion-content {
-            display: none;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
 </body>
-
 </html>
+
+
+
+
+
