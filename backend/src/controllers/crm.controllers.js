@@ -350,8 +350,8 @@ const buscarCRM = async (req, res) => {
       SELECT cs.*, u.nombre as nombre_cliente 
       FROM casos_soporte cs 
       LEFT JOIN usuario u ON cs.id_cliente = u.idUsuario
-      WHERE cs.asunto LIKE ? OR cs.descripcion LIKE ? OR cs.estado LIKE ?
-    `, [searchTerm, searchTerm, searchTerm]);
+      WHERE cs.asunto LIKE ? OR cs.descripcion LIKE ? OR cs.estado LIKE ? OR u.nombre LIKE ?
+    `, [searchTerm, searchTerm, searchTerm, searchTerm]);
 
     // Búsqueda en actividades
     const actividades = await connection.query(`
@@ -376,7 +376,7 @@ const buscarCRM = async (req, res) => {
       SELECT o.*, u.nombre as nombre_cliente 
       FROM oportunidades o 
       LEFT JOIN usuario u ON o.id_cliente = u.idUsuario
-      WHERE o.titulo LIKE ? OR o.etapa LIKE ?, u.nombre LIKE ?
+      WHERE o.titulo LIKE ? OR o.etapa LIKE ? OR u.nombre LIKE ?
     `, [searchTerm, searchTerm, searchTerm]);
 
     const resultados = {
